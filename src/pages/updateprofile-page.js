@@ -3,17 +3,19 @@ import { Input, StyledButton, StyledForm } from "../components/input";
 import * as userServices from "../services/user-services";
 import { useAuth } from "../context/auth-context";
 
-function ProfilePage () {
+function UpdateProfilePage () {
 
   const { email, name, phone, address } = useAuth().user;
-  const { setUser } = useAuth();
+  const { user, setCurrentPage } = useAuth();
   const [formData, setFormData] = useState({
         email: email,
         name: name,
         phone: phone,
         address: address,
-    });
-
+  });
+  console.log("formdata1", formData);
+  console.log("user1", user);
+  setCurrentPage("UpdateProfilePage");
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -22,8 +24,8 @@ function ProfilePage () {
 
     function handleSubmit(event) {
       event.preventDefault();
+
       userServices.update(formData);
-      setUser(formData);
     }
 
     return (
@@ -62,4 +64,4 @@ function ProfilePage () {
       );
 }
 
-export default ProfilePage
+export default UpdateProfilePage

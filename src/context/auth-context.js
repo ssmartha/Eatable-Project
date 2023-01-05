@@ -20,7 +20,7 @@ function AuthProvider(props) {
 
   useEffect(() => {
     userServices.getUser().then(setUser).catch(console.log);
-  }, []);
+  }, [currentPage]);
 
   // useEffect((userData) => {
   //   setUserData({ ...userData, email: user.email });
@@ -51,6 +51,7 @@ function AuthProvider(props) {
 
   const value = {
     user,
+    setUser,
     favorites,
     setFavorites,
     currentPage,

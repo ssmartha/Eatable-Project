@@ -12,10 +12,6 @@ function AuthProvider(props) {
   const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState("");
   const [iconClickedStatus, setIconClickedStatus] = useState("");
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
   const [state, setState] = useState({
     status: "idle", // success - error - pending
     data: null,
@@ -26,11 +22,15 @@ function AuthProvider(props) {
     userServices.getUser().then(setUser).catch(console.log);
   }, []);
 
-  useEffect(() => {
-    getFavorites().then((data) => {
-      setFavorites([...data])
-  }).catch(console.log);
-  }, [currentPage]);
+  // useEffect((userData) => {
+  //   setUserData({ ...userData, email: user.email });
+  // }, [user]);
+
+  // useEffect(() => {
+  //   getFavorites().then((data) => {
+  //     setFavorites([...data])
+  // }).catch(console.log);
+  // }, [currentPage]);
 
   function login(credentials) {
     console.log("credentials:", credentials)
@@ -41,10 +41,13 @@ function AuthProvider(props) {
     authServices.logout().then(() => setUser(null));
   }
 
-  function signup(userData) {
-    console.log("userData:", userData)
-    userServices.createUser(userData).then(setUser).catch(console.log);
+  function signup(newCredentials) {
+    console.log("newCredentials:", newCredentials)
+    userServices.createUser(newCredentials).then(setUser).catch(console.log);
   }
+
+  console.log("useeeeeeeeeeeer", user);
+  // console.log("user dataaaaaaaaa", userData)
 
   const value = {
     user,
@@ -63,8 +66,6 @@ function AuthProvider(props) {
     signup,
     showEntryOption,
     setShowEntryOption,
-    formData,
-    setFormData
   };
 
   return <AuthContext.Provider value={value} {...props} />;

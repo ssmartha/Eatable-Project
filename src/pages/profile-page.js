@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input, StyledButton, StyledForm } from "../components/input";
-import { update } from "../services/user-services";
+import * as userServices from "../services/user-services";
 import { useAuth } from "../context/auth-context";
 
 function ProfilePage () {
 
-    const { email, first_name, last_name } = useAuth().user;
-    const [formData, setFormData] = useState({
+  const { email, name, phone, address } = useAuth().user;
+  const { setUser } = useAuth();
+  const [formData, setFormData] = useState({
         email: email,
-        password: "",
-        first_name: first_name,
-        last_name: last_name,
+        name: name,
+        phone: phone,
+        address: address,
     });
+
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -19,9 +21,9 @@ function ProfilePage () {
     }
 
     function handleSubmit(event) {
-        event.preventDefault();
-        console.log(formData)
-        update(formData);
+      event.preventDefault();
+      userServices.update(formData);
+      setUser(formData);
     }
 
     return (
@@ -34,13 +36,12 @@ function ProfilePage () {
               onChange={handleChange}
               label="Name"
             />
-            <Input
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              label="Email"
-            />
+
+            <div>
+              <p> Email </p>
+              <p> {formData.email} </p>
+            </div>
+
             <Input
               name="phone"
               type="phone"

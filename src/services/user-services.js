@@ -1,9 +1,9 @@
 import { tokenKey } from "../config";
 import collectionClient from "./collection-client";
 
-export async function createUser(userData) {
+export async function createUser(newCredentials) {
   const { token, ...user } = await collectionClient("/users", {
-    body: userData,
+    body: newCredentials,
   });
 
   sessionStorage.setItem(tokenKey, token);

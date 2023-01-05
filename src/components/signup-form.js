@@ -4,17 +4,22 @@ import { Input, StyledButton, StyledForm } from "./input";
 
 // { onSignup }
 function SignupForm() {
-  const { signup, formData, setFormData } = useAuth();
-  const { email, password } = formData;
+  const { signup } = useAuth();
+  const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
 
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+    console.log("insideHnadleChangeeee",formData);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
+    console.log("insideHnadleSubmit",formData)
     signup(formData);
   }
 
@@ -24,7 +29,7 @@ function SignupForm() {
         <Input
           name="email"
           type="email"
-          value={email}
+          value={formData.email}
           onChange={handleChange}
           placeholder="my_mail@mail.com"
           label="Email address"
@@ -32,7 +37,7 @@ function SignupForm() {
         <Input
           name="password"
           type="password"
-          value={password}
+          value={formData.password}
           onChange={handleChange}
           placeholder="*******"
           label="Password"

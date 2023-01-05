@@ -62,9 +62,9 @@ function AuthenticatedApp() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route index element={<Search />} />
+          <Route index path="/profile" element={<Profile />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/history" element={<History />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart/>} />
           <Route path="*" element={<Search />} />
         </Routes>

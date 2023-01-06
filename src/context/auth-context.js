@@ -1,13 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getFavorites } from "../services/favorites-service";
+import { getFavorites } from "../services/order-services";
 import * as authServices from "../services/auth-services";
 import * as userServices from "../services/user-services";
+import * as productServices from "../services/product-services";
 
 const AuthContext = createContext();
 
 function AuthProvider(props) {
   const [showEntryOption, setShowEntryOption] = useState("login");
   const [user, setUser] = useState(null);
+  const [productsList, setProductsList] = useState(null);
   const [userFound, setUserFound] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState("");
@@ -18,19 +20,15 @@ function AuthProvider(props) {
     error: null,
   });
 
-  useEffect(() => {
+  console.log("state in authhhhhhhhhhhhhhhhhhh 23 with data", state)
+
+  useEffect((state) => {
     userServices.getUser().then(setUser).catch(console.log);
+    setState({ ...state, status: "show-products" });
+    productServices.getProducts().then((event) => setState({ ...state, data: event })).catch(console.log);
+    console.log("se termino de setear data!!!!");
   }, [currentPage]);
 
-  // useEffect((userData) => {
-  //   setUserData({ ...userData, email: user.email });
-  // }, [user]);
-
-  // useEffect(() => {
-  //   getFavorites().then((data) => {
-  //     setFavorites([...data])
-  // }).catch(console.log);
-  // }, [currentPage]);
 
   function login(credentials) {
     console.log("credentials:", credentials)
@@ -56,6 +54,8 @@ function AuthProvider(props) {
     setFavorites,
     currentPage,
     setCurrentPage,
+    productsList,
+    setProductsList,
     userFound,
     setUserFound,
     state,

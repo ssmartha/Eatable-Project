@@ -6,9 +6,12 @@ import SearchState from "../components/search-state";
 import { Link } from "react-router-dom";
 import { HiUserGroup } from "react-icons/hi";
 import { RiUserHeartFill, RiBookMarkFill, RiCodeBoxFill } from "react-icons/ri";
-import { BsStar, BsStarFill } from "react-icons/bs";
-import { createFavorite, removeFavorite } from "../services/favorites-service";
+import { BsStar, BsStarFill, BsCart } from "react-icons/bs";
+import { FiSearch } from "react-icons/fi";
+import { AiOutlineLeft } from "react-icons/ai";
+import { createFavorite, removeFavorite } from "../services/order-services";
 import { useAuth } from "../context/auth-context";
+import ShowProducts from "../components/show-products"
 
 function HomePage() {
   const { favorites, setCurrentPage, state, setState, iconClickedStatus, setIconClickedStatus } = useAuth();
@@ -17,8 +20,8 @@ function HomePage() {
   // const [iconClickedStatus, setIconClickedStatus] = useState("");
 
   setCurrentPage("HomePage");
+  console.log("state in home page",state);
   const { status, data: user, error } = state;
-  // setState({ status: "searching", data: null, error: null })
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -75,6 +78,10 @@ function HomePage() {
     iconClickedStatus ? deleteFromFavorites(userId) : addToFavorites(userData);
   }
 
+  function handleLeftIconClick(state) {
+    setState({ ...state, status: "show-products" });
+  }
+
   const UserDataContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -100,7 +107,8 @@ function HomePage() {
   return (
     <div style={{display: "flex", justifyContent: "center", alignItems: "center",}}>
       <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <StyledForm onSubmit={handleSubmit} style={{marginTop: "53px",}}>
+        <StyledForm onSubmit={handleSubmit} style={{ marginTop: "53px", display: "flex", flexDirection: "row" }}>
+          {status === "show-products" ? <FiSearch /> : <AiOutlineLeft onClick={() => handleLeftIconClick(state)} />}
           <Input
             name="query"
             type="query"
@@ -108,9 +116,10 @@ function HomePage() {
             onChange={(event) => setQuery(event.target.value)}
             placeholder="username"
           />
+          <BsCart/>
         </StyledForm>
         {status === "searching" && <SearchState message={"Searching products"}/>}
-        {status === "show-products" && <p> Displaying Products by categories </p>}
+        {status === "show-products" && <ShowProducts />}
         {status === "search-results" && (
           <p> Products found </p>
         )}

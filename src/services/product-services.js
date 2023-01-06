@@ -1,12 +1,19 @@
 import collectionClient from "./collection-client";
+import { productsKey } from "../config";
+
+// export async function getProducts() {
+//   return await collectionClient(`/products`);
+// }
 
 export async function getProducts() {
-  return await collectionClient(`/products`);
+  const { ...products } = await collectionClient(`/products`);
+
+  console.log("inside get products function CHENNIE 0001", Object.values(products));
+
+  sessionStorage.setItem(productsKey, JSON.stringify(Object.values(products)));
+  return Object.values(products);
 }
 
-export async function getProduct(id) {
-  return await collectionClient(`/products/${id}`);
-}
 
 export async function createProduct(newProductData) {
   return await collectionClient("/products", {

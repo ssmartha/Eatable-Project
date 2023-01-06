@@ -3,12 +3,14 @@ import { getFavorites } from "../services/order-services";
 import * as authServices from "../services/auth-services";
 import * as userServices from "../services/user-services";
 import * as productServices from "../services/product-services";
+import { productsKey } from "../config";
 
 const AuthContext = createContext();
 
 function AuthProvider(props) {
   const [showEntryOption, setShowEntryOption] = useState("login");
   const [user, setUser] = useState(null);
+  const [chennie, setChennie] = useState([]);
   const [productsList, setProductsList] = useState(null);
   const [userFound, setUserFound] = useState(null);
   const [favorites, setFavorites] = useState([]);
@@ -21,18 +23,27 @@ function AuthProvider(props) {
   });
 
   console.log("state in authhhhhhhhhhhhhhhhhhh 23 with data", state)
+  // productServices.getProducts().then(setUserFound).catch(console.log);
+
+  // useEffect(() => {
+  //   productServices.getProducts().then(setUserFound).catch(console.log);
+  //   console.log("se termino de setear data! SINGLE!!!");
+  // }, []);
 
   useEffect((state) => {
     userServices.getUser().then(setUser).catch(console.log);
     setState({ ...state, status: "show-products" });
-    productServices.getProducts().then((event) => setState({ ...state, data: event })).catch(console.log);
-    console.log("se termino de setear data!!!!");
+    // const productsList = JSON.parse(sessionStorage.getItem(productsKey));
+    // const allProducts = Object.values(productsList);
+    // console.log("sessionStorage productsssssssss", productsList, typeof productsList);
+    // console.log("sessionStorage allProductsssssss", allProducts, typeof allProducts);
   }, [currentPage]);
 
 
   function login(credentials) {
     console.log("credentials:", credentials)
     authServices.login(credentials).then(setUser).catch(console.log);
+    // productServices.getProducts().then(setUserFound).catch(console.log);
   }
 
   function logout() {
@@ -42,6 +53,7 @@ function AuthProvider(props) {
   function signup(newCredentials) {
     console.log("newCredentials:", newCredentials)
     userServices.createUser(newCredentials).then(setUser).catch(console.log);
+    // productServices.getProducts().then(setUserFound).catch(console.log);
   }
 
   console.log("useeeeeeeeeeeer", user);
@@ -67,6 +79,8 @@ function AuthProvider(props) {
     signup,
     showEntryOption,
     setShowEntryOption,
+    chennie,
+    setChennie
   };
 
   return <AuthContext.Provider value={value} {...props} />;

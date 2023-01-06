@@ -4,6 +4,7 @@ import { Wrapper } from "../styles";
 import { useAuth } from "../context/auth-context";
 import styled from "@emotion/styled";
 import ProductCard from "./product-card";
+import { productsKey } from "../config";
 
 const ProductsContainer = styled.div`
   display: flex;
@@ -13,16 +14,20 @@ const ProductsContainer = styled.div`
 
 function CategoryProducts({ category }) {
   console.log("category inside listt", category);
-  const { productsList, state } = useAuth();
-  console.log("stateeeeeeeeeeeeeeee inside categories", state)
-  console.log("products inside listt", productsList);
+
+  const productsList = JSON.parse(sessionStorage.getItem(productsKey));
+  console.log("chennie list uwu",productsList)
+  // const { productsList, state, userFound } = useAuth();
+  // console.log("stateeeeeeeeeeeeeeee inside categories", state)
+  // console.log("products inside listt", productsList);
+  // console.log("inside ctegory productssqadf USERFOUND", userFound)
   let currentCategoryProducts = productsList.filter((product) => product.category === category);
-  // console.log("filtereddddddddd productsssssss",currentCategoryProducts);
+  console.log("chennie products",currentCategoryProducts);
 
   return (
     <>
       <p>HOLA CATEGORY PRODUCTS!</p>
-      {/* <ProductsContainer>
+      <ProductsContainer>
         {currentCategoryProducts.map((product) => (
           <ProductCard
             key={product.id}
@@ -30,7 +35,7 @@ function CategoryProducts({ category }) {
             {...product}
           />
         ))}
-      </ProductsContainer> */}
+      </ProductsContainer>
     </>
   );
 }

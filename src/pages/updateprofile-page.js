@@ -29,7 +29,10 @@ function UpdateProfilePage () {
     }
 
     return (
-        <div>
+      <div>
+          <p>My profile</p>
+          <p>Update personal details</p>
+
           <StyledForm onSubmit={handleSubmit} style={{marginTop: "50px",}}>
             <Input
               name="name"
@@ -64,4 +67,4 @@ function UpdateProfilePage () {
       );
 }
 
-export default UpdateProfilePage
+export default UpdateProfilePage;

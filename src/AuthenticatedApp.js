@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import SearchPage from "./pages/search-page"
 import UpdateProfilePage from "./pages/updateprofile-page";
+import ShowProfilePage from "./pages/showprofile-page";
 import HistoryPage from "./pages/history-page";
 import { VscHome } from "react-icons/vsc";
 import { BsFillStarFill, BsPersonFill } from "react-icons/bs";
@@ -21,7 +22,7 @@ function AuthenticatedApp() {
   const Footer = () => (
   <nav style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-around", background: "#F2F2F2", boxShadow: "0px -2px 0px rgba(0, 0, 0, 0.25)", width: "100%", height: "68px", position: "absolute", bottom: "1px", right:"0"}}>
     <Link to="/search"> {<VscHome style={{width: "45px", height: "45px", color: "#BDBDBD"}} />} </Link>
-    <Link to="/update-profile">  {<BsPersonFill style={{width: "45px", height: "45px", color: "#BDBDBD"}} />} </Link>
+    <Link to="/show-profile">  {<BsPersonFill style={{width: "45px", height: "45px", color: "#BDBDBD"}} />} </Link>
     <Link to="/history"> {<BiHistory style={{width: "45px", height: "45px", color: "#BDBDBD"}} />} </Link>
   </nav>
   );
@@ -29,7 +30,7 @@ function AuthenticatedApp() {
   function ShowProfile() {
     return (
       <div>
-        {/* <ShowProfilePage /> */}
+        <ShowProfilePage />
       </div>
     );
   }

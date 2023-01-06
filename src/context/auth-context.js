@@ -13,7 +13,7 @@ function AuthProvider(props) {
   const [currentPage, setCurrentPage] = useState("");
   const [iconClickedStatus, setIconClickedStatus] = useState("");
   const [state, setState] = useState({
-    status: "idle", // success - error - pending
+    status: "show-products", // success - error - pending
     data: null,
     error: null,
   });

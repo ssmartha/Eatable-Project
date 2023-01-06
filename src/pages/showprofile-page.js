@@ -18,7 +18,7 @@ function ShowProfilePage () {
   }
 
     return (
-      <div>
+      <div style={{display: "flex", flexDirection: "column", gap: "16px", alignItems: "center", marginTop: "30px"}}>
           <p>My profile</p>
           <p>Personal details</p>
 
@@ -29,7 +29,7 @@ function ShowProfilePage () {
           <p> {user.address} </p>
           <StyledButton onClick={handleLogout}>Logout</StyledButton>
 
-        </div>
+      </div>
       );
 }
 

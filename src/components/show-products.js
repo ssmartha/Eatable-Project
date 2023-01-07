@@ -23,9 +23,12 @@ function ShowProducts({ productsList }) {
       <ProductsContainer>
         {productsList.map((product) => (
           <ProductCard
-            key={product.id}
-            // onProductClick={onProductClick}
-            {...product}
+          id={product.id}
+          key={product.id}
+          image={product.picture_url}
+          name={product.name}
+          price={product.price}
+          url={`/products/${product?.id}`}
           />
         ))}
       </ProductsContainer>

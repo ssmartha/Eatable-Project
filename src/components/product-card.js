@@ -1,5 +1,6 @@
 import * as Styled from "../styles";
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
 const StyledCardDetails = styled.div`
   display: flex;
@@ -12,14 +13,16 @@ const StyledCardDetails = styled.div`
   background-color: pink;
 `;
 
-function ProductCard({ id, name, price }) {
+function ProductCard({ image, name, price, url, id }) {
 
   return (
     <>
-      <StyledCardDetails>
-        <p>{ name }</p>
-        <p>{ price }</p>
-      </StyledCardDetails>
+      <Link to={url}>
+        <StyledCardDetails>
+          <p>{ name }</p>
+          <p>{ price }</p>
+        </StyledCardDetails>
+      </Link>
     </>
   );
 }

@@ -17,6 +17,7 @@ import { BiHistory } from "react-icons/bi";
 // import { RiSearchFill } from "react-icons/ri";
 import { useAuth } from "./context/auth-context";
 import * as productServices from "./services/product-services";
+import ShowProduct from "./components/show-product";
 
 
 
@@ -26,7 +27,7 @@ function AuthenticatedApp() {
 
   const Footer = () => (
   <nav style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-around", background: "#F2F2F2", boxShadow: "0px -2px 0px rgba(0, 0, 0, 0.25)", width: "100%", height: "68px", position: "absolute", bottom: "1px", right:"0"}}>
-    <Link to="/home"> {<VscHome style={{width: "45px", height: "45px", color: "#BDBDBD"}} />} </Link>
+    <Link to="/products"> {<VscHome style={{width: "45px", height: "45px", color: "#BDBDBD"}} />} </Link>
     <Link to="/show-profile">  {<BsPersonFill style={{width: "45px", height: "45px", color: "#BDBDBD"}} />} </Link>
     <Link to="/history"> {<BiHistory style={{width: "45px", height: "45px", color: "#BDBDBD"}} />} </Link>
   </nav>
@@ -78,7 +79,11 @@ function AuthenticatedApp() {
         <Routes>
           <Route index path="/show-profile" element={<ShowProfile />} />
           <Route path="update-profile" element={<UpdateProfile />} />
-          <Route path="/home" element={<Home />} />
+
+          <Route path="/products">
+            <Route index element={<Home />} />
+            <Route path=":id" element={<ShowProduct/>} />
+          </Route>
           <Route path="/history" element={<History />} />
           <Route path="/cart" element={<Cart/>} />
           <Route path="*" element={<UpdateProfile />} />

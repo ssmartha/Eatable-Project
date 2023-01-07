@@ -15,13 +15,12 @@ function AuthProvider(props) {
   const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState("");
   const [iconClickedStatus, setIconClickedStatus] = useState("");
+  const [cartData, setCartData] = useState([]);
   const [state, setState] = useState({
     status: "show-products", // success - error - pending
     data: null,
     error: null,
   });
-
-  console.log("BAEK STATE", state)
 
 
   useEffect((state) => {
@@ -61,7 +60,9 @@ function AuthProvider(props) {
     logout,
     signup,
     showEntryOption,
-    setShowEntryOption
+    setShowEntryOption,
+    cartData,
+    setCartData
   };
 
   return <AuthContext.Provider value={value} {...props} />;

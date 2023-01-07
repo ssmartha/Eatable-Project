@@ -16,7 +16,7 @@ function ShowProfilePage () {
   }
 
     return (
-      <div style={{display: "flex", flexDirection: "column", gap: "16px", alignItems: "center", marginTop: "30px"}}>
+      <div style={{display: "flex", flexDirection: "column", gap: "16px", alignItems: "center", marginTop: "53px"}}>
           <p>My profile</p>
           <p>Personal details</p>
 

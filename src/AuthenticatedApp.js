@@ -18,6 +18,7 @@ import { BiHistory } from "react-icons/bi";
 import { useAuth } from "./context/auth-context";
 import * as productServices from "./services/product-services";
 import ShowProduct from "./components/show-product";
+import CartPage from "./pages/cart-page";
 
 
 
@@ -68,7 +69,7 @@ function AuthenticatedApp() {
   function Cart() {
     return (
       <div>
-        <p> Cart Page </p>
+        <CartPage />
       </div>
     );
   }
@@ -85,7 +86,8 @@ function AuthenticatedApp() {
             <Route path=":id" element={<ShowProduct/>} />
           </Route>
           <Route path="/history" element={<History />} />
-          <Route path="/cart" element={<Cart/>} />
+          <Route path="/cart" element={<Cart />} />
+          {/* <Route path="/checkout" element={<Checkout/>} /> */}
           <Route path="*" element={<UpdateProfile />} />
         </Routes>
         <Footer />

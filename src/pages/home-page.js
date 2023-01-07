@@ -72,7 +72,7 @@ function HomePage() {
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search"
           />
-          <BsCart/>
+          <Link to="/cart"> <BsCart/> </Link>
         </StyledForm>
         {status === "show-products" && <CategoryProducts />}
         {status === "search-results" && <ShowProducts productsList={queryResults} />}

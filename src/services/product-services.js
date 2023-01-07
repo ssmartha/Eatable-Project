@@ -8,7 +8,7 @@ import { productsKey } from "../config";
 export async function getProducts() {
   const { ...products } = await collectionClient(`/products`);
 
-  console.log("inside get products function CHENNIE 0001", Object.values(products));
+  // console.log("inside get products function CHENNIE 0001", Object.values(products));
 
   sessionStorage.setItem(productsKey, JSON.stringify(Object.values(products)));
   return Object.values(products);

@@ -10,7 +10,6 @@ const AuthContext = createContext();
 function AuthProvider(props) {
   const [showEntryOption, setShowEntryOption] = useState("login");
   const [user, setUser] = useState(null);
-  const [chennie, setChennie] = useState([]);
   const [productsList, setProductsList] = useState(null);
   const [userFound, setUserFound] = useState(null);
   const [favorites, setFavorites] = useState([]);
@@ -22,28 +21,17 @@ function AuthProvider(props) {
     error: null,
   });
 
-  console.log("state in authhhhhhhhhhhhhhhhhhh 23 with data", state)
-  // productServices.getProducts().then(setUserFound).catch(console.log);
+  console.log("BAEK STATE", state)
 
-  // useEffect(() => {
-  //   productServices.getProducts().then(setUserFound).catch(console.log);
-  //   console.log("se termino de setear data! SINGLE!!!");
-  // }, []);
 
   useEffect((state) => {
     userServices.getUser().then(setUser).catch(console.log);
     setState({ ...state, status: "show-products" });
-    // const productsList = JSON.parse(sessionStorage.getItem(productsKey));
-    // const allProducts = Object.values(productsList);
-    // console.log("sessionStorage productsssssssss", productsList, typeof productsList);
-    // console.log("sessionStorage allProductsssssss", allProducts, typeof allProducts);
   }, [currentPage]);
 
 
   function login(credentials) {
-    console.log("credentials:", credentials)
     authServices.login(credentials).then(setUser).catch(console.log);
-    // productServices.getProducts().then(setUserFound).catch(console.log);
   }
 
   function logout() {
@@ -51,13 +39,8 @@ function AuthProvider(props) {
   }
 
   function signup(newCredentials) {
-    console.log("newCredentials:", newCredentials)
     userServices.createUser(newCredentials).then(setUser).catch(console.log);
-    // productServices.getProducts().then(setUserFound).catch(console.log);
   }
-
-  console.log("useeeeeeeeeeeer", user);
-  // console.log("user dataaaaaaaaa", userData)
 
   const value = {
     user,
@@ -78,9 +61,7 @@ function AuthProvider(props) {
     logout,
     signup,
     showEntryOption,
-    setShowEntryOption,
-    chennie,
-    setChennie
+    setShowEntryOption
   };
 
   return <AuthContext.Provider value={value} {...props} />;

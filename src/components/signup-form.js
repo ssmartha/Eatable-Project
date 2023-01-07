@@ -13,13 +13,11 @@ function SignupForm() {
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-    console.log("insideHnadleChangeeee",formData);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log("insideHnadleSubmit",formData)
     signup(formData);
   }
 

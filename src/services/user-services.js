@@ -29,6 +29,5 @@ export async function update(updateData) {
     method: "PATCH",
   });
 
-  console.log("inside update", user);
   return user;
 }

@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 function ShowProfilePage () {
 
   const { user, setCurrentPage, logout } = useAuth();
-
-  console.log("user1", user);
   setCurrentPage("ShowProfilePage");
 
   function handleLogout(event) {

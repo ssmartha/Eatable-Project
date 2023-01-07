@@ -1,44 +1,92 @@
-// import CategoryCard from "../CategoryCard";
-import PropTypes from "prop-types";
-import { Wrapper } from "../styles";
-import { useAuth } from "../context/auth-context";
 import styled from "@emotion/styled";
-import ProductCard from "./product-card";
+import { useState } from "react";
+// import { useAuth } from "./context/auth-context";
+// import { colors } from "./styles";
+import { StyledDivForm } from "./input";
+// import CategoryProducts from "./show-products";
 import { productsKey } from "../config";
+import ShowProducts from "./show-products";
 
-const ProductsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center
+const ItalianOption = styled.div`
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
 `;
 
-function CategoryProducts({ category }) {
-  console.log("category inside listt", category);
+const MexicanOption = styled.div`
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+`;
+
+const SnacksOption = styled.div`
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+`;
+
+const SoupsOption = styled.div`
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+`;
+
+const OptionsContainer = styled.div`
+  margin: 0px;
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+  appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+  margin-top: 20px;
+`;
+
+const CategoriesDataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+function CategoryProducts() {
+  const [productOption, setProductOption] = useState('italian');
 
   const productsList = JSON.parse(sessionStorage.getItem(productsKey));
-  console.log("chennie list uwu",productsList)
-  // const { productsList, state, userFound } = useAuth();
-  // console.log("stateeeeeeeeeeeeeeee inside categories", state)
-  // console.log("products inside listt", productsList);
-  // console.log("inside ctegory productssqadf USERFOUND", userFound)
-  let currentCategoryProducts = productsList.filter((product) => product.category === category);
-  console.log("chennie products",currentCategoryProducts);
+  let currentCategoryProducts = productsList.filter((product) => product.category === productOption);
 
   return (
-    <>
-      <p>HOLA CATEGORY PRODUCTS!</p>
-      <ProductsContainer>
-        {currentCategoryProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            // onProductClick={onProductClick}
-            {...product}
-          />
-        ))}
-      </ProductsContainer>
-    </>
+    <StyledDivForm>
+      <CategoriesDataContainer>
+        <OptionsContainer>
+          <ItalianOption onClick={() => setProductOption( 'italian' )}> Italian </ItalianOption>
+          <MexicanOption onClick={() => setProductOption('mexican')}> Mexican</MexicanOption>
+          <SnacksOption onClick={() => setProductOption('snack')}> Snacks</SnacksOption>
+          <SoupsOption onClick={() => setProductOption( 'soups' )}> Soups</SoupsOption>
+        </OptionsContainer>
+
+        <ShowProducts
+          productsList={currentCategoryProducts}
+        />
+      </CategoriesDataContainer>
+
+    </StyledDivForm>
   );
 }
-
 
 export default CategoryProducts;

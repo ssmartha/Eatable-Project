@@ -21,22 +21,8 @@ import * as productServices from "./services/product-services";
 
 
 function AuthenticatedApp() {
-  // const { chennie, setChennie } = useAuth();
-  // console.log("data with storage CHENNIE", chennie);
-  productServices.getProducts().then((event)=> console.log("chennie data", Object.values(event))).catch(console.log);
 
-  // useEffect(() => {
-  //   productServices.getProducts().then(setUserFound).catch(console.log);
-  //   console.log("data with storage dsfdjg", userFound);
-  //   // userServices.getUser().then(setUser).catch(console.log);
-  //   // setState({ ...state, status: "show-products" });
-  //   // const productsList = JSON.parse(sessionStorage.getItem(productsKey));
-  //   // const allProducts = Object.values(productsList);
-  //   // console.log("sessionStorage productsssssssss", productsList, typeof productsList);
-  //   // console.log("sessionStorage allProductsssssss", allProducts, typeof allProducts);
-  // }, []);
-
-  // console.log("data with storage dsfdjg", chennie);
+  productServices.getProducts().then((event)=> console.log(Object.values(event))).catch(console.log);
 
   const Footer = () => (
   <nav style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-around", background: "#F2F2F2", boxShadow: "0px -2px 0px rgba(0, 0, 0, 0.25)", width: "100%", height: "68px", position: "absolute", bottom: "1px", right:"0"}}>

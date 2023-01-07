@@ -3,12 +3,17 @@ import styled from "@emotion/styled";
 
 const StyledCardDetails = styled.div`
   display: flex;
-  direction: column;
-  gap: 3px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100px;
+  height: 150px;
+  background-color: pink;
 `;
 
 function ProductCard({ id, name, price }) {
-  console.log("inside product cardddddddd",id,name,price);
+
   return (
     <>
       <StyledCardDetails>

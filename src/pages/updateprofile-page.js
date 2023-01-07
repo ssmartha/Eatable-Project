@@ -13,8 +13,6 @@ function UpdateProfilePage () {
         phone: phone,
         address: address,
   });
-  console.log("formdata1", formData);
-  console.log("user1", user);
   setCurrentPage("UpdateProfilePage");
 
     function handleChange(event) {

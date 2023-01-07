@@ -4,7 +4,7 @@ import { colors } from "../styles";
 const StyledInput = styled("input")`
   border: none;
   text-align: center;
-  width: 213px;
+  width: 278px;
   height: 28px;
   background: #FFFFFF;
   box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
@@ -16,7 +16,7 @@ const StyledInput = styled("input")`
 `;
 
 export const StyledButton = styled("button")`
-  width: 167px;
+  width: 300px;
   height: 36px;
   border: none;
   background: #FA4A0C;
@@ -26,8 +26,8 @@ export const StyledButton = styled("button")`
 export const StyledForm = styled("form")`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 32px;
+  // align-items: center;
+  // gap: 32px;
 `;
 
 const StyledDiv = styled("div")`

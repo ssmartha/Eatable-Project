@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
 import { Input, StyledButton, StyledForm } from "./input";
+import styled from "@emotion/styled";
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 function LoginForm() {
   const { login } = useAuth();
@@ -22,7 +30,7 @@ function LoginForm() {
 
   return (
     <div>
-      <StyledForm onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "40px"}}>
         <Input
           name="email"
           type="email"

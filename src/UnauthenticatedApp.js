@@ -24,38 +24,46 @@ const SignupOption = styled.div`
   line-height: 20px;
 `;
 
-const OptionsContainer = styled.div`
-  margin: 0px;
+const Wrapper = styled.div`
   display: flex;
-  gap: 100px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: fit-content;
-  height: fit-content;
-  appearance: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
+`;
+
+const OptionsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
 `;
 
 function UnauthenticatedApp() {
   const { showEntryOption, setShowEntryOption } = useAuth();
 
   return (
-    <StyledDivForm>
+    <div style={{marginTop: "80px"}}>
       <div>
-        <p style={{ textAlign: "center" }}> EATABLE</p>
-        <p style={{ textAlign: "center" }}> Food for everyone </p>
+          <Wrapper>
+            <img
+            src={require("./assets/images/eatable-logo.png")}
+            alt="eatable logo"
+            style={{ height: "60px" }}
+            />
+            <p style={{ textAlign: "center",  fontSize: "12px", color: "#FA4A0C"  }}> Food for everyone </p>
+          </Wrapper>
 
-        <OptionsContainer>
-          <LoginOption onClick={() => setShowEntryOption( 'login' )}> Login </LoginOption>
-          <SignupOption onClick={() => setShowEntryOption( 'signup' )}> Signup</SignupOption>
-        </OptionsContainer>
-      </div>
+          <OptionsContainer>
+            <LoginOption onClick={() => setShowEntryOption( 'login' )}> Login </LoginOption>
+            <SignupOption onClick={() => setShowEntryOption( 'signup' )}> Signup</SignupOption>
+          </OptionsContainer>
+        </div>
 
-
-      {showEntryOption ==='login' ? <LoginForm /> : <SignupForm />}
-
-    </StyledDivForm>
+      <StyledDivForm>
+          {showEntryOption ==='login' ? <LoginForm /> : <SignupForm />}
+      </StyledDivForm>
+    </div>
   );
 }
 

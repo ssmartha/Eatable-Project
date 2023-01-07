@@ -63,7 +63,7 @@ function HomePage() {
   return (
     <div style={{display: "flex", justifyContent: "center", alignItems: "center",}}>
       <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <StyledForm onSubmit={(event)=> handleSubmit(state, productsList, query, event)} style={{ marginTop: "53px", display: "flex", flexDirection: "row" }}>
+        <StyledForm onSubmit={(event)=> handleSubmit(state, productsList, query, event)} style={{ marginTop: "33px", display: "flex", flexDirection: "row" }}>
           {status === "show-products" ? <FiSearch /> : <AiOutlineLeft onClick={() => handleLeftIconClick(state)} />}
           <Input
             name="query"

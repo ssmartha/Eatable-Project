@@ -88,7 +88,7 @@ function AuthenticatedApp() {
           <Route path="/history" element={<History />} />
           <Route path="/cart" element={<Cart />} />
           {/* <Route path="/checkout" element={<Checkout/>} /> */}
-          <Route path="*" element={<UpdateProfile />} />
+          <Route path="*" element={<ShowProfile />} />
         </Routes>
         <Footer />
       </BrowserRouter>

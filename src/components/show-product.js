@@ -17,13 +17,13 @@ import { GiSandsOfTime } from "react-icons/gi";
 import { AiOutlineLeft } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import { addNewOrderToCart, getCartProducts } from "../services/order-services";
+import { cartKey } from "../config";
 
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: pink;
   width: 300px;
 `;
 
@@ -45,17 +45,18 @@ function ShowProduct() {
       .catch(console.log);
   }, [id]);
 
-  // useEffect((initialCart) => {
-  //   setCartData(initialCart)
-  //   // getCartProducts().then((data) =>{
-  //   //     let ordersList=  data.map(function(obj) {
-  //   //     return obj["order_details"].map(function(order) {
-  //   //       return {date: obj["created_at"], id: order["product_id"], quantity: order["quantity"], subtotal: order["subtotal"], "product_name": order["product_name"]} } )
-  //   //       }).reduce(function (a, b) { return a.concat(b) });
-  //   //     setCartData(ordersList);
-  //   //   }).catch(console.log);
+  useEffect((cartData) => {
+    sessionStorage.setItem(cartKey, JSON.stringify(cartData));
+    // setCartData(initialCart)
+    // getCartProducts().then((data) =>{
+    //     let ordersList=  data.map(function(obj) {
+    //     return obj["order_details"].map(function(order) {
+    //       return {date: obj["created_at"], id: order["product_id"], quantity: order["quantity"], subtotal: order["subtotal"], "product_name": order["product_name"]} } )
+    //       }).reduce(function (a, b) { return a.concat(b) });
+    //     setCartData(ordersList);
+    //   }).catch(console.log);
 
-  // }, [addedToCart]);
+  }, [addedToCart]);
 
   function handleButtonClick(currentProductData, cartData, user, id, state) {
 
@@ -82,7 +83,7 @@ function ShowProduct() {
   }
 
   return (
-    <div style={{display: "flex", justifyContent: "center", alignItems: "center",marginTop:"53px"}}>
+    <div style={{display: "flex", justifyContent: "center", alignItems: "center",marginTop:"33px"}}>
       <MainContainer>
         {isLoading ? (
           <div>
@@ -95,11 +96,14 @@ function ShowProduct() {
                 <div>
                   {addedToCart ? <AiOutlineLeft onClick={()=> setAddedToCart(false)}/> : <Link to="/products"> <AiOutlineLeft/> </Link>}
                   <div style={{display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
+                    <img src={currentProductData.picture_url} alt={id} style={{ width: "241px", height: "241px", borderRadius: "50%", marginTop: "1px", }} />
                     <h3>{currentProductData.name}</h3>
                     <h3>${currentProductData.price}</h3>
                   </div>
                   <h6>Description</h6>
-                  <p>${currentProductData.description}</p>
+                  <div style={{overflowY: "hidden", height: "120px", marginBottom: "20px"}}>
+                    <p>${currentProductData.description}</p>
+                  </div>
                 </div>
 
               <StyledButton onClick={()=> handleButtonClick( currentProductData, cartData, user, id)} disabled={addedToCart}>

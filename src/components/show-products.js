@@ -16,10 +16,13 @@ const ProductsContainer = styled.div`
 `;
 
 function ShowProducts({ productsList }) {
+  const { state} = useAuth();
+
+  const { status, ...rest } = state;
 
   return (
     <>
-      <p>HOLA CATEGORY PRODUCTS!</p>
+      {status === "search-results" && <p>Found {productsList.length} results</p>}
       <ProductsContainer>
         {productsList.map((product) => (
           <ProductCard

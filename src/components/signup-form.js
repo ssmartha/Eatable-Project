@@ -23,7 +23,7 @@ function SignupForm() {
 
   return (
     <div>
-      <StyledForm onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "40px"}}>
         <Input
           name="email"
           type="email"

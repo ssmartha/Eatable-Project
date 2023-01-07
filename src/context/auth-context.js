@@ -22,6 +22,7 @@ function AuthProvider(props) {
     error: null,
   });
 
+  console.log("JUNMYEONNNNNNNNNNNNN", cartData)
 
   useEffect((state) => {
     userServices.getUser().then(setUser).catch(console.log);

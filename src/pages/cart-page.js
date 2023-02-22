@@ -2,7 +2,7 @@
 // import PropTypes from "prop-types";
 // import { Wrapper } from "../styles";
 // import { useAuth } from "../context/auth-context";
-// import styled from "@emotion/styled";
+import styled from "@emotion/styled";
 // // import ProductCard from "./product-card";
 // import { productsKey } from "../config";
 // import { useParams } from 'react-router-dom';
@@ -18,6 +18,7 @@
 // import { BsCart } from "react-icons/bs";
 // import { addNewOrderToCart, getCartProducts } from "../services/order-services";
 // import { cartKey } from "../config";
+import CartProduct from "../components/cart-product";
 
 // const MainContainer = styled.div`
 //   display: flex;
@@ -56,6 +57,16 @@
 //   height: 50px;
 //   background-color: white;
 // `;
+
+const Wrapper1 = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Wrapper2 = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 function CartPage() {
 //   // const { id } = useParams();
@@ -116,7 +127,10 @@ function CartPage() {
 //   // }
 
   return (
-    <p> CART PAGE</p>
+    <Wrapper1 style={{justifyContent:"center", alignItems:"center", marginTop:"33px"}}>
+      <p> CART PAGE</p>
+      <CartProduct/>
+    </Wrapper1>
 //     // <div style={{display: "flex", justifyContent: "center", alignItems: "center",marginTop:"33px"}}>
 //     //   <MainContainer>
 //     //     <>

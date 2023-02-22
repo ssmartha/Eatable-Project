@@ -1,6 +1,16 @@
 import styled from "@emotion/styled";
 import { colors } from "../styles";
 
+export const Wrapper1 = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Wrapper2 = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const StyledInput = styled("input")`
   border: none;
   text-align: center;

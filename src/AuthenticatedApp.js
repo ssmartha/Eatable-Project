@@ -34,61 +34,21 @@ function AuthenticatedApp() {
   </nav>
   );
 
-  function ShowProfile() {
-    return (
-      <div>
-        <ShowProfilePage />
-      </div>
-    );
-  }
-
-  function UpdateProfile() {
-    return (
-      <div>
-        <UpdateProfilePage />
-      </div>
-    );
-  }
-
-  function Home() {
-    return (
-      <div>
-        <HomePage/>
-      </div>
-    );
-  }
-
-  function History() {
-    return (
-      <div>
-        <HistoryPage/>
-      </div>
-    );
-  }
-
-  function Cart() {
-    return (
-      <div>
-        <CartPage />
-      </div>
-    );
-  }
-
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route index path="/show-profile" element={<ShowProfile />} />
-          <Route path="update-profile" element={<UpdateProfile />} />
+          <Route index path="/show-profile" element={<ShowProfilePage />} />
+          <Route path="update-profile" element={<UpdateProfilePage />} />
 
           <Route path="/products">
-            <Route index element={<Home />} />
+            <Route index element={<HomePage />} />
             <Route path=":id" element={<ShowProduct/>} />
           </Route>
-          <Route path="/history" element={<History />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/history" element={<HistoryPage />} />
+          <Route path="/cart" element={<CartPage />} />
           {/* <Route path="/checkout" element={<Checkout/>} /> */}
-          <Route path="*" element={<ShowProfile />} />
+          <Route path="*" element={<ShowProfilePage />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -26,8 +26,8 @@ const StyledInput = styled("input")`
 `;
 
 export const StyledButton = styled("button")`
-  width: 300px;
-  height: 36px;
+  width: 100%;
+  height: 70px;
   border: none;
   background: #FA4A0C;
   border-radius: 30px;

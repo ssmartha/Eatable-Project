@@ -19,6 +19,7 @@ import { useAuth } from "./context/auth-context";
 import * as productServices from "./services/product-services";
 import ShowProduct from "./components/show-product";
 import CartPage from "./pages/cart-page";
+import CheckoutPage from "./pages/checkout-page";
 
 
 
@@ -47,7 +48,7 @@ function AuthenticatedApp() {
           </Route>
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/cart" element={<CartPage />} />
-          {/* <Route path="/checkout" element={<Checkout/>} /> */}
+          <Route path="/checkout" element={<CheckoutPage/>} />
           <Route path="*" element={<ShowProfilePage />} />
         </Routes>
         <Footer />

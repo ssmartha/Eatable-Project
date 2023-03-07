@@ -42,7 +42,6 @@ function ShowProfilePage () {
     return (
       <div style={{display: "flex", flexDirection: "column", gap: "16px", alignItems: "center", marginTop: "33px"}}>
         <MainContainer>
-          <>
             <div style={{ display: "flex", flexDirection: "row", gap: "88px",
                      justifyContent: "left", alignItems: "left"}}>
               <Link to="/products"> <AiOutlineLeft/> </Link>
@@ -75,9 +74,7 @@ function ShowProfilePage () {
             <ButtonWrapper>
               <StyledButton onClick={handleLogout}>Logout</StyledButton>
             </ButtonWrapper>
-          </>
         </MainContainer>
-
       </div>
       );
 }

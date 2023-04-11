@@ -33,20 +33,20 @@ const Text2 = styled.p`
     line-height: 22.63px;
 `;
 
-function CartProduct(){
+function CartProduct({image, name, price, quantity}){
 
     return(
         <>
         <ProductContainer>
-            image
-            {/* <img src={image} alt={id}/> */}
+            <img src={image} alt={"product photo"} style={{height:"55px", width:"60px", borderRadius: "50%"}}/>
+
             <Wrapper1 style={{gap: "8px"}}>
-                <Text1>Veggie tomato mix</Text1>
+                <Text1>{name}</Text1>
                 <Wrapper2 style={{gap: "89px", alignItems:"center", justifyContent:"center"}}>
-                    <Text2 style={{color: "#FA4A0C"}}>$75.45</Text2>
+                    <Text2 style={{color: "#FA4A0C"}}>{price}</Text2>
                     <CounterContainer>
                      <Text2 style={{color: "#FFFFFF"}}>-</Text2>
-                     <Text2 style={{color: "#FFFFFF"}}>5</Text2>
+                     <Text2 style={{color: "#FFFFFF"}}>{quantity}</Text2>
                      <Text2 style={{color: "#FFFFFF"}}>+</Text2>
                     </CounterContainer>
                 </Wrapper2>

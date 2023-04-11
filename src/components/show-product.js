@@ -5,7 +5,7 @@ import { useAuth } from "../context/auth-context";
 import styled from "@emotion/styled";
 import ProductCard from "./product-card";
 import { productsKey } from "../config";
-import { useParams } from 'react-router-dom';
+import { useParams, useResolvedPath } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import * as productServices from "../services/product-services";
 import { StyledButton } from "./input";
@@ -32,9 +32,11 @@ function ShowProduct() {
   const { user, state, setState, cartData, setCartData} = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [currentProductData, setCurrentProductData] = useState(null);
-  const [addedToCart, setAddedToCart] = useState(false);
 
-  // let initialCart = [];
+  console.log("CONSOLE CARTDATA!! IN SHOW PRODUCT!!36 FIRST CART DATA", cartData)
+
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+
 
   useEffect(() => {
     productServices.getProduct(id)
@@ -43,43 +45,34 @@ function ShowProduct() {
         setIsLoading(false);
       })
       .catch(console.log);
+
   }, [id]);
 
-  useEffect((cartData) => {
-    sessionStorage.setItem(cartKey, JSON.stringify(cartData));
-    // setCartData(initialCart)
-    // getCartProducts().then((data) =>{
-    //     let ordersList=  data.map(function(obj) {
-    //     return obj["order_details"].map(function(order) {
-    //       return {date: obj["created_at"], id: order["product_id"], quantity: order["quantity"], subtotal: order["subtotal"], "product_name": order["product_name"]} } )
-    //       }).reduce(function (a, b) { return a.concat(b) });
-    //     setCartData(ordersList);
-    //   }).catch(console.log);
+  function handleButtonClick(currentProductData, cartData, user) {
 
-  }, [addedToCart]);
+    if (!cartData){
+      setCartData([{"id": currentProductData.id, "quantity": 1, "image": currentProductData.picture_url, "name": currentProductData.name, "price": currentProductData.price}]);
 
-  function handleButtonClick(currentProductData, cartData, user, id, state) {
+    } else {
+      
+      const newCartData = cartData.push({"id":currentProductData.id, "quantity":1, "image": currentProductData.picture_url, "name": currentProductData.name, "price": currentProductData.price})
 
-    // const newOrder = {
-    //   "delivery_address": user.address,
-    //   "items": [
-    //     {"id": id, "quantity": 1 }
-    //   ]
-    // }
-    // console.log(newOrder);
-    // addNewOrderToCart(newOrder).then(console.log).catch(console.log);
-    // let cart = cartData;
-    // let newCart = cart.push(currentProductData);
-    console.log("CHANNIE PRODUCT DATA", currentProductData, typeof currentProductData);
-    console.log("CHANNIE CART DATA", cartData, typeof cartData);
+      const uniqueProducts = cartData.reduce((acum, current)=> {
+        const existing = acum.find(product => product.id === currentProductData.id);
+        if(existing){
+          existing.quantity += current.quantity;
+        } else {
+          acum.push(current);
+        }
+        return acum
+      }, [])
 
-    // initialCart.push(currentProductData)
 
-    // console.log("CHANNIE NEW CART", newCart)
-    // setCartData(newCart)
-    // setCartData({...cartData,...currentProductData, quantity: 1});
-    setCartData([...cartData, { ...currentProductData, quantity: 1 }]);
-    setAddedToCart(true);
+      setCartData(uniqueProducts);
+    }
+    
+    
+    setIsAddedToCart(true);
   }
 
   return (
@@ -94,7 +87,7 @@ function ShowProduct() {
           : (
             <>
                 <div>
-                  {addedToCart ? <AiOutlineLeft onClick={()=> setAddedToCart(false)}/> : <Link to="/products"> <AiOutlineLeft/> </Link>}
+                  <Link to="/products"> <AiOutlineLeft/> </Link>
                   <div style={{display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
                     <img src={currentProductData.picture_url} alt={id} style={{ width: "241px", height: "241px", borderRadius: "50%", marginTop: "1px", }} />
                     <h3>{currentProductData.name}</h3>
@@ -106,8 +99,8 @@ function ShowProduct() {
                   </div>
                 </div>
 
-              <StyledButton onClick={()=> handleButtonClick( currentProductData, cartData, user, id)} disabled={addedToCart}>
-                {addedToCart ? "Added to Cart" : "Add to Cart"}
+              <StyledButton onClick={()=> handleButtonClick( currentProductData, cartData, user)} disabled={isAddedToCart}>
+                {isAddedToCart ? <p>Added To Cart</p> : <p>Add To Cart</p>}
               </StyledButton>
             </>
           )}

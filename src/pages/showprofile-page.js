@@ -66,7 +66,7 @@ function ShowProfilePage () {
                 <div style={{ display: "flex", flexDirection: "row", gap: "200px",
                       justifyContent: "center", alignItems: "center"}}>
                     <p> History </p>
-                    <AiOutlineRight/>
+                    <Link to="/history"><AiOutlineRight/></Link>
                   </div>
               </WhiteWrapper>
             </div>

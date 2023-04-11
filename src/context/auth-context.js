@@ -22,21 +22,11 @@ function AuthProvider(props) {
     error: null,
   });
 
-  console.log("JUNMYEONNNNNNNNNNNNN CART DATA", cartData)
+  console.log("CONSOLE AUTH CART DATA", cartData)
 
   useEffect((state, currentPage, cartData) => {
     userServices.getUser().then(setUser).catch(console.log);
     setState({ ...state, status: "show-products" });
-    // console.log(cartData);
-    // if (cartData) {
-    //       let ordersList=  cartData.map(function(obj) {
-    //       return obj["order_details"].map(function(order) {
-    //         return {date: obj["created_at"], id: order["product_id"], quantity: order["quantity"], subtotal: order["subtotal"], "product_name": order["product_name"]} } )
-    //         }).reduce(function (a, b) { return a.concat(b) });
-    //     setCartData(ordersList);
-    // } else {
-    //   setCartData([]);
-    // }
 
   }, [currentPage]);
 

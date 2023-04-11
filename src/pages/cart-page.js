@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import {AiOutlineLeft} from "react-icons/ai"
-import CartProduct from "../components/cart-product";
 import {Wrapper1, Wrapper2} from "../components/input"
 import { StyledButton } from "../components/input";
+import { useAuth } from "../context/auth-context";
+import CartProduct from "../components/cart-product";
 
 const Text1 = styled.p`
     font-weight: 600;
@@ -33,6 +34,9 @@ const MainContainer = styled.div`
 
 function CartPage() {
 
+  const {cartData, setCartData} = useAuth();
+  console.log("CARTDATA IN CARTPAGE !!! 38!!",cartData);
+
   return (
     <Wrapper1 style={{marginTop:"33px", alignItems:"center"}}>
       <MainContainer>
@@ -40,19 +44,34 @@ function CartPage() {
             <Link to="/products"><AiOutlineLeft/></Link>
             <Text1>Cart</Text1>
           </Wrapper2>
-          <Wrapper1 style={{justifyContent:"center", alignItems:"center", gap:"20px"}}>
-            <CartProduct/>
-            <CartProduct/>
-          </Wrapper1>
 
-          <Wrapper2 style={{gap:"199px"}}>
-            <Text2>Total</Text2>
-            <Text3>$97.90</Text3>
-          </Wrapper2>
+          {cartData?
+          <>
+            <Wrapper1 style={{justifyContent:"center", alignItems:"center", gap:"20px"}}>
+              {cartData.map((product) => (
+                <CartProduct 
+                key={product.id}
+                id={product.id}
+                image={product.image}
+                name={product.name}
+                price={product.price}
+                quantity={product.quantity}
+                />
+              ))}
+            </Wrapper1>
+            <Wrapper2 style={{gap:"199px"}}>
+              <Text2>Total</Text2>
+              <Text3>$97.90</Text3>
+            </Wrapper2>
 
-          <StyledButton style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-              <Link to="/checkout"> Checkout </Link>
-          </StyledButton>
+            <StyledButton style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <Link to="/checkout"> Checkout </Link>
+            </StyledButton>
+          </>
+          :
+           <p>No hay productos en el carrito</p>
+           }
+
       </MainContainer>
     </Wrapper1>
   );

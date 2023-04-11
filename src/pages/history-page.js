@@ -102,6 +102,7 @@ function HistoryPage() {
           {showOrderDetails? <AiOutlineUp style={{alignSelf:'flex-end'}} onClick={()=> setShowOrderDetails(!showOrderDetails)}/> 
           : <AiOutlineDown style={{alignSelf:'flex-end'}} onClick={()=> setShowOrderDetails(!showOrderDetails)}/>}
         </HistoryOfTheDayContainer>
+        
       </MainContainer>
     </Wrapper1>
   );

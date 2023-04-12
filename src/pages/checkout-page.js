@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
 import {Link} from "react-router-dom";
+import { useState } from "react";
 import {AiOutlineLeft} from "react-icons/ai";
+import { useAuth } from "../context/auth-context";
 import { Wrapper1, Wrapper2, StyledButton } from "../components/input";
+import UpdateDetails from "../components/update-details";
 
 const Text1= styled.p`
     font-weight: 600;
@@ -61,9 +64,12 @@ const AddressDetailsContainer= styled.div`
 `;
 
 function CheckoutPage(){
-    
+
+    const {user, totalCurrentOrder} = useAuth();
+    const [changeUserDetails, setChangeUserDetails] = useState(false)
+
     return(
-        <Wrapper1 style={{gap:"20px", alignItems:"center", marginTop:"33px"}}>
+        <Wrapper1 style={{alignItems:"center", marginTop:"33px"}}>
             <MainContainer>
                 <Wrapper2 style={{gap:"105px", marginBottom:"25px"}}>
                     <Link to="/cart"><AiOutlineLeft/></Link>
@@ -72,31 +78,40 @@ function CheckoutPage(){
 
                 <Text1 style={{marginBottom:"30px"}}>Delivery</Text1>
 
-                <Wrapper2 style={{marginBottom:"17px", justifyContent:"space-between"}}>
-                    <Text4>Address details</Text4>
-                    <Text5 style={{color:"#FA4A0C"}}>change</Text5>
-                </Wrapper2>
+                {changeUserDetails?
+                    <>
+                        <Text4 style={{marginBottom:"17px"}}>Update details</Text4>
+                        <UpdateDetails updateMainState={setChangeUserDetails} newMainState={false}/>
+                    </>
+                    : 
+                    <>
+                        <Wrapper2 style={{ marginBottom: "17px",justifyContent:"space-between"}}>
+                            <Text4>Address details</Text4>
+                            <Text5 style={{color:"#FA4A0C"}} onClick={()=> setChangeUserDetails(true)}>change</Text5>
+                        </Wrapper2>
 
-                <AddressDetailsContainer>
-                    <div style={{paddingBottom:"7px",borderBottom: "0.5px solid white"}}>
-                      <Text4>Margarita Flores</Text4>
-                    </div>
-                    <div style={{padding: "10px 0px 5px 0px", borderBottom:"0.5px solid white"}}>
-                      <Text6>Calle Rosales 123, urb El Jardin</Text6>
-                    </div>
-                    <div style={{paddingTop:"10px"}}>
-                      <Text6>987654321</Text6> 
-                    </div>
-                </AddressDetailsContainer>
+                        <AddressDetailsContainer>
+                            <div style={{paddingBottom:"7px",borderBottom: "0.5px solid white"}}>
+                            <Text4>{user.name}</Text4>
+                            </div>
+                            <div style={{padding: "10px 0px 5px 0px", borderBottom:"0.5px solid white"}}>
+                            <Text6>{user.address}</Text6>
+                            </div>
+                            <div style={{paddingTop:"10px"}}>
+                            <Text6>{user.phone}</Text6> 
+                            </div>
+                        </AddressDetailsContainer>
 
-                <Wrapper2 style={{justifyContent:"space-between", marginBottom:"35px", marginTop:"80px"}}>
-                    <Text7>Total</Text7>
-                    <Text3>$27.90</Text3>
-                </Wrapper2>
+                        <Wrapper2 style={{justifyContent:"space-between", marginBottom:"35px", marginTop:"80px"}}>
+                            <Text7>Total</Text7>
+                            <Text3>{totalCurrentOrder}</Text3>
+                        </Wrapper2>
 
-                <StyledButton>
-                    <Text4>Complete order</Text4>
-                </StyledButton>
+                        <StyledButton>
+                            <Text4>Complete order</Text4>
+                        </StyledButton>
+                    </>
+                }
             </MainContainer>
         </Wrapper1>
     );

@@ -8,8 +8,8 @@ import {
   useParams,
 } from "react-router-dom";
 import HomePage from "./pages/home-page";
-import UpdateProfilePage from "./pages/updateprofile-page";
-import ShowProfilePage from "./pages/showprofile-page";
+// import UpdateProfilePage from "./pages/updateprofile-page";
+import ProfilePage from "./pages/profile-page";
 import HistoryPage from "./pages/history-page";
 import { VscHome } from "react-icons/vsc";
 import { BsFillStarFill, BsPersonFill } from "react-icons/bs";
@@ -39,8 +39,7 @@ function AuthenticatedApp() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route index path="/show-profile" element={<ShowProfilePage />} />
-          <Route path="update-profile" element={<UpdateProfilePage />} />
+          <Route index path="/profile" element={<ProfilePage />} />
 
           <Route path="/products">
             <Route index element={<HomePage />} />
@@ -49,7 +48,7 @@ function AuthenticatedApp() {
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage/>} />
-          <Route path="*" element={<ShowProfilePage />} />
+          <Route path="*" element={<ProfilePage />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -33,8 +33,6 @@ function ShowProduct() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentProductData, setCurrentProductData] = useState(null);
 
-  console.log("CONSOLE CARTDATA!! IN SHOW PRODUCT!!36 FIRST CART DATA", cartData)
-
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
 

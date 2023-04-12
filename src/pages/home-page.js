@@ -15,7 +15,7 @@ import ShowProducts from "../components/show-products";
 import { productsKey } from "../config";
 
 function HomePage() {
-  const { favorites, setCurrentPage, state, setState, iconClickedStatus, setIconClickedStatus } = useAuth();
+  const {setCurrentPage, state, setState, iconClickedStatus, setIconClickedStatus } = useAuth();
   const [query, setQuery] = useState("");
   const [searchState, setSearchState] = useState("");
 

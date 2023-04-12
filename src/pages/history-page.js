@@ -52,10 +52,9 @@ const Text5=styled.p`
 `;
 
 function HistoryPage() {
-  const { favorites, setCurrentPage } = useAuth();
+  const { setCurrentPage } = useAuth();
   const [showOrderDetails, setShowOrderDetails]= useState(false)
   setCurrentPage("FavoritePage");
-  console.log(favorites);
 
   return (
     <Wrapper1 style={{marginTop:"33px", alignItems:"center"}}>

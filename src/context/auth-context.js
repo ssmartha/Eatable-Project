@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getFavorites } from "../services/order-services";
+import * as orderServices from "../services/order-services";
 import * as authServices from "../services/auth-services";
 import * as userServices from "../services/user-services";
 import * as productServices from "../services/product-services";
@@ -12,17 +12,16 @@ function AuthProvider(props) {
   const [user, setUser] = useState(null);
   const [productsList, setProductsList] = useState(null);
   const [userFound, setUserFound] = useState(null);
-  const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState("");
   const [iconClickedStatus, setIconClickedStatus] = useState("");
   const [cartData, setCartData] = useState(null);
+  const [totalCurrentOrder, setTotalCurrentOrder] = useState(0);
   const [state, setState] = useState({
     status: "show-products", // success - error - pending
     data: null,
     error: null,
   });
 
-  console.log("CONSOLE AUTH CART DATA", cartData)
 
   useEffect((state, currentPage, cartData) => {
     userServices.getUser().then(setUser).catch(console.log);
@@ -46,8 +45,6 @@ function AuthProvider(props) {
   const value = {
     user,
     setUser,
-    favorites,
-    setFavorites,
     currentPage,
     setCurrentPage,
     productsList,
@@ -64,7 +61,9 @@ function AuthProvider(props) {
     showEntryOption,
     setShowEntryOption,
     cartData,
-    setCartData
+    setCartData,
+    totalCurrentOrder,
+    setTotalCurrentOrder
   };
 
   return <AuthContext.Provider value={value} {...props} />;

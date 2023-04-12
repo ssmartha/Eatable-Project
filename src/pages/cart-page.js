@@ -5,6 +5,7 @@ import {Wrapper1, Wrapper2} from "../components/input"
 import { StyledButton } from "../components/input";
 import { useAuth } from "../context/auth-context";
 import CartProduct from "../components/cart-product";
+import { update } from "../services/user-services";
 
 const Text1 = styled.p`
     font-weight: 600;
@@ -34,8 +35,43 @@ const MainContainer = styled.div`
 
 function CartPage() {
 
-  const {cartData, setCartData} = useAuth();
-  console.log("CARTDATA IN CARTPAGE !!! 38!!",cartData);
+  const {cartData, setCartData, setTotalCurrentOrder, totalCurrentOrder} = useAuth();
+
+  if (cartData){
+    const cartDataCopy = [...cartData];
+
+    const total = cartDataCopy.reduce((acum, product)=>{
+      return acum + product.quantity * product.price
+    }, 0);
+
+    setTotalCurrentOrder(total);
+  }
+
+  function increaseQuantity(id){
+    const index = cartData.findIndex(product => product.id === id)
+
+    if(index !== -1){
+      const updatedQuantityInCartData = [...cartData];
+      updatedQuantityInCartData[index] = {...updatedQuantityInCartData[index], quantity: updatedQuantityInCartData[index].quantity+1};
+      setCartData(updatedQuantityInCartData);
+    }
+  }
+
+  function decreaseQuantity(id){
+    const index = cartData.findIndex(product => product.id === id)
+
+    if(index !== -1 && cartData[index].quantity > 0){
+      const updatedQuantityInCartData = [...cartData];
+      updatedQuantityInCartData[index] = {... updatedQuantityInCartData[index], quantity: updatedQuantityInCartData[index].quantity-1};
+      setCartData(updatedQuantityInCartData);
+    }
+
+    if(cartData[index].quantity === 1 ){
+      let updatedCartDataList = [...cartData];
+      updatedCartDataList = updatedCartDataList.filter(product => product.id !== id)
+      setCartData(updatedCartDataList);
+    }
+  }
 
   return (
     <Wrapper1 style={{marginTop:"33px", alignItems:"center"}}>
@@ -56,12 +92,14 @@ function CartPage() {
                 name={product.name}
                 price={product.price}
                 quantity={product.quantity}
+                increaseQuantity={increaseQuantity}
+                decreaseQuantity={decreaseQuantity}
                 />
               ))}
             </Wrapper1>
             <Wrapper2 style={{gap:"199px"}}>
               <Text2>Total</Text2>
-              <Text3>$97.90</Text3>
+              <Text3>{totalCurrentOrder}</Text3>
             </Wrapper2>
 
             <StyledButton style={{display: "flex", justifyContent: "center", alignItems: "center"}}>

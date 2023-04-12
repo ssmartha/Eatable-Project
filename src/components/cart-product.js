@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import {Wrapper1, Wrapper2} from "../components/input"
+import { useAuth } from "../context/auth-context";
 
 const ProductContainer = styled.div`
     display: flex;
@@ -33,21 +34,21 @@ const Text2 = styled.p`
     line-height: 22.63px;
 `;
 
-function CartProduct({image, name, price, quantity}){
+function CartProduct({image, name, price, quantity, id, increaseQuantity, decreaseQuantity}){
 
     return(
         <>
         <ProductContainer>
             <img src={image} alt={"product photo"} style={{height:"55px", width:"60px", borderRadius: "50%"}}/>
-
+ 
             <Wrapper1 style={{gap: "8px"}}>
                 <Text1>{name}</Text1>
                 <Wrapper2 style={{gap: "89px", alignItems:"center", justifyContent:"center"}}>
-                    <Text2 style={{color: "#FA4A0C"}}>{price}</Text2>
+                    <Text2 style={{color: "#FA4A0C"}}>{price * quantity}</Text2>
                     <CounterContainer>
-                     <Text2 style={{color: "#FFFFFF"}}>-</Text2>
+                     <Text2 style={{color: "#FFFFFF"}} onClick={()=> decreaseQuantity(id)}>-</Text2>
                      <Text2 style={{color: "#FFFFFF"}}>{quantity}</Text2>
-                     <Text2 style={{color: "#FFFFFF"}}>+</Text2>
+                     <Text2 style={{color: "#FFFFFF"}} onClick={()=> increaseQuantity(id)}>+</Text2>
                     </CounterContainer>
                 </Wrapper2>
             </Wrapper1>

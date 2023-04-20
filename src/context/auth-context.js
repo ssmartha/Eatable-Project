@@ -15,6 +15,7 @@ function AuthProvider(props) {
   const [currentPage, setCurrentPage] = useState("");
   const [iconClickedStatus, setIconClickedStatus] = useState("");
   const [cartData, setCartData] = useState(null);
+  const [ordersHistory, setOrdersHistory]= useState(null);
   const [totalCurrentOrder, setTotalCurrentOrder] = useState(0);
   const [state, setState] = useState({
     status: "show-products", // success - error - pending
@@ -63,7 +64,9 @@ function AuthProvider(props) {
     cartData,
     setCartData,
     totalCurrentOrder,
-    setTotalCurrentOrder
+    setTotalCurrentOrder,
+    ordersHistory,
+    setOrdersHistory
   };
 
   return <AuthContext.Provider value={value} {...props} />;

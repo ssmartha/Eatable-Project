@@ -16,7 +16,6 @@ import { CiSearch } from "react-icons/ci";
 import { GiSandsOfTime } from "react-icons/gi";
 import { AiOutlineLeft } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
-import { addNewOrderToCart, getCartProducts } from "../services/order-services";
 import { cartKey } from "../config";
 
 const MainContainer = styled.div`

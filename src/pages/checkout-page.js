@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { useState } from "react";
 import {AiOutlineLeft} from "react-icons/ai";
 import { useAuth } from "../context/auth-context";
 import { Wrapper1, Wrapper2, StyledButton } from "../components/input";
 import UpdateDetails from "../components/update-details";
+import { addNewOrder, getOrders } from "../services/order-services";
+import { Navigate } from "react-router-dom";
 
 const Text1= styled.p`
     font-weight: 600;
@@ -65,8 +67,26 @@ const AddressDetailsContainer= styled.div`
 
 function CheckoutPage(){
 
-    const {user, totalCurrentOrder} = useAuth();
+    const {user, totalCurrentOrder, cartData, setCartData,
+        setOrdersHistory, setTotalCurrentOrder} = useAuth();
     const [changeUserDetails, setChangeUserDetails] = useState(false)
+    const [disabledStatusOrderButton, setDisabledStatusOrderButton]= useState(cartData? false: true)
+    const navigate = useNavigate();
+
+    function completingOrder(){
+        const cleanCartData = cartData?.reduce((acum,current)=>{
+            acum.push({id: current.id, quantity: current.quantity});
+            return acum;            
+        },[])
+
+        const newOrder={"delivery_address": user.address,"items": cleanCartData}
+
+        addNewOrder(newOrder).then(console.log).catch(console.log)
+        setCartData(null);
+        setTotalCurrentOrder(0);
+        // getOrders().then((completedOrders)=> setOrdersHistory(completedOrders)).catch(console.log)
+        navigate("/history")
+    }
 
     return(
         <Wrapper1 style={{alignItems:"center", marginTop:"33px"}}>
@@ -107,7 +127,7 @@ function CheckoutPage(){
                             <Text3>{totalCurrentOrder}</Text3>
                         </Wrapper2>
 
-                        <StyledButton>
+                        <StyledButton onClick={completingOrder} disabled={disabledStatusOrderButton}>
                             <Text4>Complete order</Text4>
                         </StyledButton>
                     </>

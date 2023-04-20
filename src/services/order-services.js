@@ -1,11 +1,11 @@
 import collectionClient from "./collection-client";
 
-export async function addNewOrderToCart(newOrder) {
+export async function addNewOrder(newOrder) {
   return await collectionClient("/orders", {
     body: newOrder,
   });
 }
 
-export async function getCartProducts() {
+export async function getOrders() {
   return await collectionClient(`/orders`);
 }

@@ -28,7 +28,6 @@ function UserCard({
   name="undefined",
   icon = "undefined",
 }) {
-  // console.log(id, img, user,name,icon)
 
   return (
     <div>

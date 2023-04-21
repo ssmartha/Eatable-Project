@@ -5,6 +5,7 @@ import { useAuth } from "../context/auth-context";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { AiOutlineLeft } from "react-icons/ai";
+import { colors } from "../styles";
 
 const MainContainer = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const MainContainer = styled.div`
 `;
 
 const WhiteWrapper = styled.div`
-  background-color: #FFFFFF;
+  background-color: ${colors.white.one};
   border-radius: 20px;
   padding: 12px 10px;
 `;
@@ -53,7 +54,7 @@ function UpdateDetails ({updateMainState, newMainState}) {
 
     return (
              <div style={{ display: "flex", flexDirection: "column", marginBottom: "170px"}}>
-                  <StyledForm onSubmit={handleSubmit} style={{}}>
+                  <StyledForm onSubmit={handleSubmit}>
                     <div style={{ display: "flex", flexDirection: "column", gap: "170px"}}>
                       <WhiteWrapper>
                           <Input

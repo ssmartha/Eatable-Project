@@ -11,39 +11,50 @@ export const Wrapper2 = styled.div`
   flex-direction: row;
 `;
 
-const StyledInput = styled("input")`
+const StyledInput = styled.input`
   border: none;
-  text-align: center;
-  width: 278px;
+  text-align: left;
+  width: 314px;
   height: 28px;
-  background: #FFFFFF;
-  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
-  ::placeholder {
-    text-align: center;
-    color: ${colors.gray.light};
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22.63px;
+  background: ${colors.background};
+  border-bottom: 1px solid ${colors.black.dark_charcoal};
+  padding-bottom: 5px;
+  &:focus {
+    outline: none;
   }
 `;
+
+const StyledLabel = styled.p`
+  color: ${colors.gray.one};
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.8px;
+`
 
 export const StyledButton = styled("button")`
   width: 100%;
   height: 70px;
   border: none;
-  background: #FA4A0C;
+  background: ${colors.orange.orioles_orange};
   border-radius: 30px;
+  color: ${colors.white.one}
 `;
 
 export const StyledForm = styled("form")`
   display: flex;
   flex-direction: column;
-  // align-items: center;
-  // gap: 32px;
 `;
 
 const StyledDiv = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: start;
+  gap: 5px;
 `;
 
 export const StyledDivForm = styled("div")`
@@ -64,7 +75,7 @@ export function Input({
 }) {
   return (
     <StyledDiv>
-      {label && <label htmlFor={id || name}>{label}</label>}
+      {label && <label htmlFor={id || name}><StyledLabel>{label}</StyledLabel></label>}
       <StyledInput
         id={id || name}
         name={name}

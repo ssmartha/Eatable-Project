@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import {Wrapper1, Wrapper2} from "../components/input"
 import { useAuth } from "../context/auth-context";
+import { colors } from "../styles";
 
 const ProductContainer = styled.div`
     display: flex;
@@ -16,7 +17,7 @@ const CounterContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: #FA4A0C;
+    background-color: ${colors.orange.orioles_orange};
     gap: 6px;
     border-radius: 30px;
     padding: 0px 8px;
@@ -44,11 +45,11 @@ function CartProduct({image, name, price, quantity, id, increaseQuantity, decrea
             <Wrapper1 style={{gap: "8px"}}>
                 <Text1>{name}</Text1>
                 <Wrapper2 style={{gap: "89px", alignItems:"center", justifyContent:"center"}}>
-                    <Text2 style={{color: "#FA4A0C"}}>{price * quantity}</Text2>
+                    <Text2 style={{color: `${colors.orange.orioles_orange}`}}>{price * quantity}</Text2>
                     <CounterContainer>
-                     <Text2 style={{color: "#FFFFFF"}} onClick={()=> decreaseQuantity(id)}>-</Text2>
-                     <Text2 style={{color: "#FFFFFF"}}>{quantity}</Text2>
-                     <Text2 style={{color: "#FFFFFF"}} onClick={()=> increaseQuantity(id)}>+</Text2>
+                     <Text2 style={{color: `${colors.white.one}`}} onClick={()=> decreaseQuantity(id)}>-</Text2>
+                     <Text2 style={{color: `${colors.white.one}`}}>{quantity}</Text2>
+                     <Text2 style={{color: `${colors.white.one}`}} onClick={()=> increaseQuantity(id)}>+</Text2>
                     </CounterContainer>
                 </Wrapper2>
             </Wrapper1>

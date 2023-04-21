@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Input, StyledButton, StyledForm } from "../components/input";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import UpdateDetails from "../components/update-details";
+import { colors } from "../styles";
 
 const MainContainer = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const WhiteWrapper = styled.div`
-  background-color: #FFFFFF;
+  background-color: ${colors.white.one};
   border-radius: 20px;
   padding: 12px 10px;
 `;

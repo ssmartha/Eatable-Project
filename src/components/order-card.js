@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import { Wrapper1, Wrapper2 } from "./input";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
+import { colors } from "../styles";
 
 const OrderContainer= styled.div`
     display: flex;
@@ -45,7 +46,7 @@ function OrderCard({order}){
                   :
                   <Text3>{order.order_details.length} items</Text3>
                 }
-                <Text3 style={{color:"#FA4A0C"}}>${order.total}</Text3>
+                <Text3 style={{color: `${colors.orange.orioles_orange}`}}>${order.total}</Text3>
               </Wrapper2>
 
               {showOrderDetails? 

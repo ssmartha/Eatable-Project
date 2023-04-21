@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/auth-context";
 import { Input, StyledButton, StyledForm } from "./input";
 
-// { onSignup }
+
 function SignupForm() {
   const { signup } = useAuth();
   const [formData, setFormData] = useState({
@@ -22,8 +22,7 @@ function SignupForm() {
   }
 
   return (
-    <div>
-      <StyledForm onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "40px"}}>
+      <StyledForm onSubmit={handleSubmit} style={{ gap: "60px", marginTop:"48px"}}>
         <Input
           name="email"
           type="email"
@@ -37,12 +36,11 @@ function SignupForm() {
           type="password"
           value={formData.password}
           onChange={handleChange}
-          placeholder="*******"
+          placeholder="**********"
           label="Password"
         />
         <StyledButton type="submit">Sign-up</StyledButton>
       </StyledForm>
-    </div>
   );
 }
 

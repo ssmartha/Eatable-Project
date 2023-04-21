@@ -7,6 +7,7 @@ import { Wrapper1, Wrapper2, StyledButton } from "../components/input";
 import UpdateDetails from "../components/update-details";
 import { addNewOrder, getOrders } from "../services/order-services";
 import { Navigate } from "react-router-dom";
+import { colors } from "../styles";
 
 const Text1= styled.p`
     font-weight: 600;
@@ -68,7 +69,7 @@ const AddressDetailsContainer= styled.div`
 function CheckoutPage(){
 
     const {user, totalCurrentOrder, cartData, setCartData,
-        setOrdersHistory, setTotalCurrentOrder} = useAuth();
+           setTotalCurrentOrder} = useAuth();
     const [changeUserDetails, setChangeUserDetails] = useState(false)
     const [disabledStatusOrderButton, setDisabledStatusOrderButton]= useState(cartData? false: true)
     const navigate = useNavigate();
@@ -84,7 +85,6 @@ function CheckoutPage(){
         addNewOrder(newOrder).then(console.log).catch(console.log)
         setCartData(null);
         setTotalCurrentOrder(0);
-        // getOrders().then((completedOrders)=> setOrdersHistory(completedOrders)).catch(console.log)
         navigate("/history")
     }
 
@@ -107,7 +107,7 @@ function CheckoutPage(){
                     <>
                         <Wrapper2 style={{ marginBottom: "17px",justifyContent:"space-between"}}>
                             <Text4>Address details</Text4>
-                            <Text5 style={{color:"#FA4A0C"}} onClick={()=> setChangeUserDetails(true)}>change</Text5>
+                            <Text5 style={{color: `${colors.orange.orioles_orange}`}} onClick={()=> setChangeUserDetails(true)}>change</Text5>
                         </Wrapper2>
 
                         <AddressDetailsContainer>

@@ -8,7 +8,7 @@ import { productsKey } from "../config";
 const AuthContext = createContext();
 
 function AuthProvider(props) {
-  const [showEntryOption, setShowEntryOption] = useState("login");
+  const [showEntryOption, setShowEntryOption] = useState('login');
   const [user, setUser] = useState(null);
   const [productsList, setProductsList] = useState(null);
   const [userFound, setUserFound] = useState(null);

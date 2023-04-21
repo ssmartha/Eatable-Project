@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { BsStarFill } from "react-icons/bs"
+import { BsStarFill } from "react-icons/bs";
+import { colors } from "../styles";
 
 const StyledUserCard = styled("div")`
   display: flex;
@@ -9,7 +10,7 @@ const StyledUserCard = styled("div")`
   padding: 12px;
   width: 300px;
   height: 56px;
-  background-color: #FFFFFF;
+  background-color: ${colors.white.one};
   box-shadow: 2px 2px 0px rgba(0 0 0 0.25);
   border-radius: 4px;
 `;
@@ -37,7 +38,7 @@ function UserCard({
             <p key={key}>{user}</p>
             {name !== "undefined" && <p>{name}</p>}
           </div>
-          {icon !== "undefined" && <p style={{marginLeft: "auto"}} > <BsStarFill style={{color: "#F2C94C"}}/></p>}
+          {icon !== "undefined" && <p style={{marginLeft: "auto"}} > <BsStarFill style={{color: `${colors.yellow.maize}`}}/></p>}
       </StyledUserCard>
     </div>
   );

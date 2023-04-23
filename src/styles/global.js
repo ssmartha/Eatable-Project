@@ -85,7 +85,6 @@ export const reset = css`
 export const global = css`
   body {
     font-size: 1rem;
-    line-height: 1.5rem;
     font-family: ${fonts.primary};
     color: ${colors.gray.dark};
     background-color: ${colors.background};

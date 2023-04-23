@@ -38,7 +38,6 @@ const Text2 = styled.p`
 function CartProduct({image, name, price, quantity, id, increaseQuantity, decreaseQuantity}){
 
     return(
-        <>
         <ProductContainer>
             <img src={image} alt={"product photo"} style={{height:"55px", width:"60px", borderRadius: "50%"}}/>
  
@@ -54,7 +53,6 @@ function CartProduct({image, name, price, quantity, id, increaseQuantity, decrea
                 </Wrapper2>
             </Wrapper1>
         </ProductContainer>
-        </>
     );
 }
 

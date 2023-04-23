@@ -1,47 +1,28 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-// import { useAuth } from "./context/auth-context";
-// import { colors } from "./styles";
 import { StyledDivForm } from "./input";
-// import CategoryProducts from "./show-products";
 import { productsKey } from "../config";
 import ShowProducts from "./show-products";
+import { colors } from "../styles";
 
-const ItalianOption = styled.div`
+const Option = styled.div`
   border: none;
   background: none;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-`;
-
-const MexicanOption = styled.div`
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-`;
-
-const SnacksOption = styled.div`
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-`;
-
-const SoupsOption = styled.div`
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-`;
+  cursos: pointer;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 20.29px;
+  width: 87px;
+  padding-bottom: 10px;
+  text-align: center;
+  ${props=> props.productOption === props.category? 
+    `color: ${colors.orange.orioles_orange};
+    border-bottom: 3px solid ${colors.orange.orioles_orange}`
+    : 
+    `color:${colors.gray.one};
+    border-bottom: 3px solid ${colors.background}`}
+`
 
 const OptionsContainer = styled.div`
   margin: 0px;
@@ -54,7 +35,7 @@ const OptionsContainer = styled.div`
   appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-  margin-top: 20px;
+  margin: 49px 0px 22px 0px;
 `;
 
 const CategoriesDataContainer = styled.div`
@@ -68,16 +49,33 @@ function CategoryProducts() {
   const [productOption, setProductOption] = useState('italian');
 
   const productsList = JSON.parse(sessionStorage.getItem(productsKey));
-  let currentCategoryProducts = productsList.filter((product) => product.category === productOption);
+  const categoryList = productsList.reduce((acum, current)=>{
+    const similarCategories = acum.filter((element)=> element.includes(current.category.toLowerCase()) || current.category.toLowerCase().includes(element));
+    if (similarCategories.length ===0){
+      acum.push(current.category.toLowerCase())
+    }
+    return acum
+  },[]);
+
+  console.log("category list", categoryList)
+  console.log("LIST 1",productsList);
+  let currentCategoryProducts = productsList.filter((product) => product.category.toLowerCase().includes(productOption));
+  console.log("LIST2",currentCategoryProducts);
+
+
 
   return (
     <StyledDivForm>
       <CategoriesDataContainer>
         <OptionsContainer>
-          <ItalianOption onClick={() => setProductOption( 'italian' )}> Italian </ItalianOption>
-          <MexicanOption onClick={() => setProductOption('mexican')}> Mexican</MexicanOption>
-          <SnacksOption onClick={() => setProductOption('snack')}> Snacks</SnacksOption>
-          <SoupsOption onClick={() => setProductOption( 'soups' )}> Soups</SoupsOption>
+          {categoryList.map((category)=> (
+            <Option
+            productOption={productOption}
+            category={category}
+            onClick={()=> setProductOption(category)}>
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </Option>
+          ))}
         </OptionsContainer>
 
         <ShowProducts

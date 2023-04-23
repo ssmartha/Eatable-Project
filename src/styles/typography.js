@@ -1,6 +1,6 @@
 export const fonts = {
-  primary: `'Inter', sans-serif;
-  font-family: 'Source Code Pro', monospace;`
+  primary: 'Inter',
+  secondary: 'Source Sans Pro'
 };
 
 export const typography = {
@@ -53,16 +53,3 @@ export const typography = {
     `,
   },
 };
-
-for (const size in typography.text) {
-  typography.text[size] += `
-  font-family: ${fonts.primary};
-  `;
-}
-
-for (const size in typography.head) {
-  typography.head[size] += `
-  font-family: ${fonts.secondary};
-  font-weight: 600;
-  `;
-}

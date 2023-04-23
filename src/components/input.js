@@ -11,20 +11,11 @@ export const Wrapper2 = styled.div`
   flex-direction: row;
 `;
 
-const StyledInput = styled.input`
-  border: none;
-  text-align: left;
-  width: 314px;
-  height: 28px;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22.63px;
-  background: ${colors.background};
-  border-bottom: 1px solid ${colors.black.dark_charcoal};
-  padding-bottom: 5px;
-  &:focus {
-    outline: none;
-  }
+const StyledDiv = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
 `;
 
 const StyledLabel = styled.p`
@@ -35,6 +26,25 @@ const StyledLabel = styled.p`
   font-size: 14px;
   line-height: 16.8px;
 `
+
+const StyledInput = styled.input`
+  border: none;
+  text-align: left;
+  height: 23px;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22.63px;
+  background: ${colors.background};
+  ${props=> props.name ==="query"? `width: 207px;`: `border-bottom: 1px solid ${colors.black.dark_charcoal}; padding-bottom: 5px; width: 314px;`}
+  &::placeholder {
+    color: ${colors.gray.one} !important; 
+    font-family: 'Inter'
+  }
+  &:focus {
+    outline: none;
+  }
+`;
 
 export const StyledButton = styled("button")`
   width: 100%;
@@ -50,17 +60,11 @@ export const StyledForm = styled("form")`
   flex-direction: column;
 `;
 
-const StyledDiv = styled("div")`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 5px;
-`;
-
 export const StyledDivForm = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 50px;
 `;
 

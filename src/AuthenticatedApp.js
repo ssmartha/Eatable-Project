@@ -29,11 +29,22 @@ function AuthenticatedApp() {
   productServices.getProducts().then((event)=> console.log(Object.values(event))).catch(console.log);
 
   const Footer = () => (
-  <nav style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-around", background: `${colors.white.anti_flash_white}`, boxShadow: "0px -2px 0px rgba(0, 0, 0, 0.25)", width: "100%", height: "68px", position: "absolute", bottom: "1px", right:"0"}}>
-    <Link to="/products"> {<VscHome style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
-    <Link to="/show-profile">  {<BsPersonFill style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
-    <Link to="/history"> {<BiHistory style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
-  </nav>
+    <nav 
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-around",
+      background: `${colors.white.anti_flash_white}`,
+      width: "100%",
+      height: "68px",
+      position: "sticky",
+      bottom: "0",
+      }}>
+        <Link to="/products"> {<VscHome style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
+        <Link to="/show-profile">  {<BsPersonFill style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
+        <Link to="/history"> {<BiHistory style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
+    </nav>
   );
 
   return (

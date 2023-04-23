@@ -7,12 +7,13 @@ import ProductCard from "./product-card";
 import { productsKey } from "../config";
 
 const ProductsContainer = styled.div`
-  width: fit-content;
-  display: grid;
+  display: flex;
+  flex-direction: row;
   gap: 20px;
-  grid-template-columns: repeat(2, 100px);
-  justify-content:center;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items:center;
+  justify-content: start;
+  max-width: 332px;
 `;
 
 function ShowProducts({ productsList }) {

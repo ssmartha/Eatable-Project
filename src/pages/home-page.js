@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { Input, StyledForm } from "../components/input";
-import SearchState from "../components/search-state";
+import NotFound from "../components/not-found";
 import { Link } from "react-router-dom";
 import { HiUserGroup } from "react-icons/hi";
 import { RiUserHeartFill, RiBookMarkFill, RiCodeBoxFill } from "react-icons/ri";
@@ -71,7 +71,7 @@ function HomePage() {
         </SearchCartBar>
         {status === "show-products" && <CategoryProducts />}
         {status === "search-results" && <ShowProducts productsList={queryResults} />}
-        {status === "error" && <SearchState message={"No products found"}/>}
+        {status === "error" && <NotFound item={"products"}/>}
       </div>
     </div>
   );

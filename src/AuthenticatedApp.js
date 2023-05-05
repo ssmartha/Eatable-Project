@@ -38,7 +38,7 @@ function AuthenticatedApp() {
       background: `${colors.white.anti_flash_white}`,
       width: "100%",
       height: "68px",
-      position: "sticky",
+      position: "fixed",
       bottom: "0",
       }}>
         <Link to="/products"> {<VscHome style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>

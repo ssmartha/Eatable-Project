@@ -6,6 +6,7 @@ import { StyledButton } from "../components/input";
 import { useAuth } from "../context/auth-context";
 import CartProduct from "../components/cart-product";
 import { update } from "../services/user-services";
+import NotFound from "../components/not-found";
 
 const Text1 = styled.p`
     font-weight: 600;
@@ -107,7 +108,7 @@ function CartPage() {
             </StyledButton>
           </>
           :
-           <p>No hay productos en el carrito</p>
+           <NotFound item={"products in cart"}/>
            }
 
       </MainContainer>

@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import OrderCard from "../components/order-card";
 import { getOrders } from "../services/order-services";
+import NotFound from "../components/not-found";
 
 const OrdersContainer= styled.div`
     display:flex;
     flex-direction: column;
     gap: 11px;
+    margin-bottom: 80px;
 `;
 
 const Text1=styled.p`
@@ -43,7 +45,7 @@ function HistoryPage() {
             />
           ))
           :
-          <p>No orders in history</p>
+          <NotFound item={"history"}/>
           }
           
         </OrdersContainer>

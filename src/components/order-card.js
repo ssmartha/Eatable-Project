@@ -9,7 +9,8 @@ const OrderContainer= styled.div`
     flex-direction: column;
     padding: 25px 22px 9px 30px;
     border-radius: 20px;
-    background: pink;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
+    background: ${colors.white.one};
     width: 315px;
 `;
 

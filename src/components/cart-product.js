@@ -6,7 +6,8 @@ import { colors } from "../styles";
 const ProductContainer = styled.div`
     display: flex;
     flex-direction: row;
-    background-color: pink;
+    background-color: ${colors.white.one};
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
     border-radius: 20px;
     padding: 20px;
     gap: 20px;

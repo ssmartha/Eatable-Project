@@ -63,7 +63,8 @@ const AddressDetailsContainer= styled.div`
     flex-direction: column;
     padding: 25px 30px;
     border-radius: 20px;
-    background: pink;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
+    background: ${colors.white.one};
 `;
 
 function CheckoutPage(){

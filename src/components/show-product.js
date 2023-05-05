@@ -11,7 +11,7 @@ import * as productServices from "../services/product-services";
 import { StyledButton } from "./input";
 import { Link } from "react-router-dom";
 import { CgSandClock } from "react-icons/vsc";
-import SearchState from "../components/search-state";
+import NotFound from "./not-found";
 import { CiSearch } from "react-icons/ci";
 import { GiSandsOfTime } from "react-icons/gi";
 import { AiOutlineLeft } from "react-icons/ai";

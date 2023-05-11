@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
 import { Input, StyledButton, StyledForm } from "./input";
+import { colors } from "../styles";
 
 
 function LoginForm() {
@@ -30,6 +31,7 @@ function LoginForm() {
           onChange={handleChange}
           placeholder="my_mail@mail.com"
           label="Email address"
+          from="entry"
         />
         <Input
           name="password"
@@ -38,6 +40,7 @@ function LoginForm() {
           onChange={handleChange}
           placeholder="**********"
           label="Password"
+          from="entry"
         />
         <StyledButton type="submit">Login</StyledButton>
       </StyledForm>

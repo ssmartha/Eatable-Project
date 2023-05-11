@@ -58,7 +58,8 @@ function ProfilePage () {
                       justifyContent: "left", alignItems: "left", marginTop: "18px"}}>
                 <p>Personal details</p>
                 <p onClick={()=> setProfileState("change-profile-details")}> change </p>
-              </div> : 
+              </div>
+              : 
               <div style={{ marginTop: "18px", marginBottom: "15px"}}>
                 <p>Update personal details</p>
               </div>              

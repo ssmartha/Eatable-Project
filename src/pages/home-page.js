@@ -65,6 +65,7 @@ function HomePage() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search"
+            from="query"
             />
           </StyledForm>
           <Link to="/cart" style={{color: `${colors.gray.one}`}}> <BsCart/> </Link>

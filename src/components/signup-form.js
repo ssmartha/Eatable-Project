@@ -30,6 +30,7 @@ function SignupForm() {
           onChange={handleChange}
           placeholder="my_mail@mail.com"
           label="Email address"
+          from="entry"
         />
         <Input
           name="password"
@@ -38,6 +39,7 @@ function SignupForm() {
           onChange={handleChange}
           placeholder="**********"
           label="Password"
+          from="entry"
         />
         <StyledButton type="submit">Sign-up</StyledButton>
       </StyledForm>

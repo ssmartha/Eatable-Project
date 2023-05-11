@@ -102,7 +102,7 @@ function CheckoutPage(){
                 {changeUserDetails?
                     <>
                         <Text4 style={{marginBottom:"17px"}}>Update details</Text4>
-                        <UpdateDetails updateMainState={setChangeUserDetails} newMainState={false}/>
+                        <UpdateDetails updateMainState={setChangeUserDetails} newMainState={false} from={"checkout"}/>
                     </>
                     : 
                     <>

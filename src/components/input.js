@@ -35,8 +35,34 @@ const StyledInput = styled.input`
   font-weight: 400;
   font-size: 18px;
   line-height: 22.63px;
-  background: ${colors.background};
-  ${props=> props.name ==="query"? `width: 207px;`: `border-bottom: 1px solid ${colors.black.dark_charcoal}; padding-bottom: 5px; width: 314px;`}
+  ${props => props.from === "entry" ? 
+    `
+    background-color: ${colors.background};
+    padding-bottom: 5px;
+    border-bottom: 1px solid ${colors.black.black};
+    ` 
+    :
+    props.from === "query"?
+    `
+    background-color: ${colors.background};
+    `
+    :
+    props.from === "profile"?
+    `
+    width: 288px;
+    background-color: ${colors.white.one};
+    padding-bottom: 5px;
+    border-bottom: 1px solid ${colors.black.black};
+    `
+    :
+    `
+    width: 232px;
+    background-color: ${colors.white.one};
+    padding-bottom: 7px;
+    border-bottom: 1px solid ${colors.black.black};
+    `
+  }
+
   &::placeholder {
     color: ${colors.gray.one} !important; 
     font-family: 'Inter'
@@ -50,7 +76,7 @@ export const StyledButton = styled("button")`
   width: 100%;
   height: 70px;
   border: none;
-  background: ${colors.orange.orioles_orange};
+  background-color: ${colors.orange.orioles_orange};
   border-radius: 30px;
   color: ${colors.white.one}
 `;
@@ -76,7 +102,9 @@ export function Input({
   onChange,
   placeholder,
   label,
+  from
 }) {
+  
   return (
     <StyledDiv>
       {label && <label htmlFor={id || name}><StyledLabel>{label}</StyledLabel></label>}
@@ -87,6 +115,7 @@ export function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        from={from}
       />
     </StyledDiv>
   );

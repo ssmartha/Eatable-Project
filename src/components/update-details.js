@@ -1,24 +1,47 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Input, StyledButton, StyledForm } from "./input";
 import * as userServices from "../services/user-services";
 import { useAuth } from "../context/auth-context";
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
-import { AiOutlineLeft } from "react-icons/ai";
 import { colors } from "../styles";
 
-const MainContainer = styled.div`
+const UpdateComponentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: left;
-  align-items: left;
-  width: 300px;
+  width: 314px;
+  gap: ${props => props.from === "checkout"? "150px": "220px"}
 `;
 
 const WhiteWrapper = styled.div`
   background-color: ${colors.white.one};
   border-radius: 20px;
-  padding: 12px 10px;
+  padding: 12px 11px 18px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
+`;
+
+const StyledEmailLabel = styled.p`
+  color: ${colors.gray.one};
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.8px;
+  width: 288px;
+`;
+
+const StyledEmailData = styled.p`
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22.63px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid ${colors.black.black};
+  width: 288px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -26,10 +49,10 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 300px;
+  margin-bottom: 80px;
 `;
 
-function UpdateDetails ({updateMainState, newMainState}) {
+function UpdateDetails ({updateMainState, newMainState, from}) {
 
   const { user, setUser } = useAuth();
 
@@ -53,45 +76,48 @@ function UpdateDetails ({updateMainState, newMainState}) {
     }
 
     return (
-             <div style={{ display: "flex", flexDirection: "column", marginBottom: "170px"}}>
-                  <StyledForm onSubmit={handleSubmit}>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "170px"}}>
-                      <WhiteWrapper>
-                          <Input
-                            name="name"
-                            type="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            label="Name"
-                          />
+            <StyledForm onSubmit={handleSubmit}>
+              <UpdateComponentsWrapper from={from}>
+                <WhiteWrapper>
+                    <Input
+                      name="name"
+                      type="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      label="Name"
+                      from="profile"
+                    />
 
-                          <div>
-                            <p> Email </p>
-                            <p> {formData.email} </p>
-                          </div>
-
-                          <Input
-                            name="phone"
-                            type="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            label="Phone"
-                          />
-                          <Input
-                            name="address"
-                            type="address"
-                            value={formData.address}
-                            onChange={handleChange}
-                            label="Address"
-                          />
-                      </WhiteWrapper>
-
-                      <ButtonWrapper>
-                        <StyledButton type="submit">Update</StyledButton>
-                      </ButtonWrapper>
+                    <div style={{width: "288px"}}>
+                      <StyledEmailLabel> Email </StyledEmailLabel>
+                      <StyledEmailData> {formData.email} </StyledEmailData>
                     </div>
-                  </StyledForm>
-             </div>
+
+                    <Input
+                      name="phone"
+                      type="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      label="Phone"
+                      from="profile"
+                      width="288px"
+                    />
+                    <Input
+                      name="address"
+                      type="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      label="Address"
+                      from="profile"
+                      width="288px"
+                    />
+                </WhiteWrapper>
+
+                <ButtonWrapper>
+                  <StyledButton type="submit">Update</StyledButton>
+                </ButtonWrapper>
+              </UpdateComponentsWrapper>
+            </StyledForm>
       );
 }
 

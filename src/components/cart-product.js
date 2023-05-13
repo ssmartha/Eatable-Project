@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import {Wrapper1, Wrapper2} from "../components/input"
-import { useAuth } from "../context/auth-context";
+import {Wrapper1, Wrapper2} from "../components/input";
 import { colors } from "../styles";
 
 const ProductContainer = styled.div`

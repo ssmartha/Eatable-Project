@@ -23,9 +23,7 @@ const Text1=styled.p`
 `;
 
 function HistoryPage() {
-  const {ordersHistory, setOrdersHistory, setCurrentPage, currentPage} = useAuth();
-  const [previousPage, setPreviousPage] = useState(currentPage)
-  setCurrentPage("history-page");
+  const {ordersHistory, setOrdersHistory, referencePage} = useAuth();
 
   useEffect(()=>{
     getOrders().then((completedOrders)=> {
@@ -33,16 +31,16 @@ function HistoryPage() {
         setOrdersHistory(completedOrders)
       }
     }).catch(console.log)
-  },[currentPage]);
+  },[referencePage]);
 
   return (
     <Wrapper1 style={{marginTop:"51px", alignItems:"center"}}>
       <Wrapper1 style={{width: "315px"}}>
         <Wrapper2 style={{gap:"105px", marginBottom:"23px"}}>
-          {previousPage === "home-page" ? 
+          {referencePage === "home-page" ? 
           <Link to="/products" style={{marginTop: "7px", color: `${colors.black.black}`}}><AiOutlineLeft/></Link>
           :
-          previousPage === "profile-page"?
+          referencePage === "profile-page"?
           <Link to="/profile" style={{marginTop: "7px", color: `${colors.black.black}`}}><AiOutlineLeft/></Link>
           :
           <Link to="/checkout" style={{marginTop: "7px", color: `${colors.black.black}`}}><AiOutlineLeft/></Link>
@@ -52,9 +50,10 @@ function HistoryPage() {
 
         <OrdersContainer>
           {ordersHistory?
-           ordersHistory.map((order)=>(
+           ordersHistory.map((order, index)=>(
             <OrderCard
             order = {order}
+            key={index}
             />
           ))
           :

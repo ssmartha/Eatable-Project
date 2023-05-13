@@ -1,11 +1,6 @@
-// import CategoryCard from "../CategoryCard";
-import PropTypes from "prop-types";
-import { Wrapper } from "../styles";
 import { useAuth } from "../context/auth-context";
 import styled from "@emotion/styled";
 import ProductCard from "./product-card";
-import { productsKey } from "../config";
-import { fonts } from "../styles";
 
 const ProductsContainer = styled.div`
   display: flex;

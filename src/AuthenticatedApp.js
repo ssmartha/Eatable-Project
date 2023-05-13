@@ -3,43 +3,17 @@ import {
   BrowserRouter, // Para declarar rutas => el padre de todas las rutas
   Routes, // Se ocupan de listar las rutas independientes.
   Route, // Para declarar una ruta
-  Link, // Para navegar entre las rutas
 } from "react-router-dom";
 import HomePage from "./pages/home-page";
 import ProfilePage from "./pages/profile-page";
 import HistoryPage from "./pages/history-page";
-import { VscHome } from "react-icons/vsc";
-import { BsPersonFill } from "react-icons/bs";
-import { BiHistory } from "react-icons/bi";
-import * as productServices from "./services/product-services";
 import ShowProduct from "./components/show-product";
 import CartPage from "./pages/cart-page";
 import CheckoutPage from "./pages/checkout-page";
-import { colors } from "./styles";
+import Footer from "./components/footer";
 import "./index.css"
 
 function AuthenticatedApp() {
-
-  productServices.getProducts().then((event)=> console.log(Object.values(event))).catch(console.log);
-
-  const Footer = () => (
-    <nav 
-    style={{
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-around",
-      background: `${colors.white.anti_flash_white}`,
-      width: "100%",
-      height: "68px",
-      position: "fixed",
-      bottom: "0",
-      }}>
-        <Link to="/products"> {<VscHome style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
-        <Link to="/profile">  {<BsPersonFill style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
-        <Link to="/history"> {<BiHistory style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
-    </nav>
-  );
 
   return (
     <div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
 import { Input, StyledButton, StyledForm } from "./input";
+import { getProducts } from "../services/product-services";
 
 
 function SignupForm() {
@@ -18,6 +19,7 @@ function SignupForm() {
   function handleSubmit(event) {
     event.preventDefault();
 
+    getProducts().then().catch(console.log);
     signup(formData);
   }
 

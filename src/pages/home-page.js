@@ -1,14 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { Input, StyledForm } from "../components/input";
 import NotFound from "../components/not-found";
 import { Link } from "react-router-dom";
-import { HiUserGroup } from "react-icons/hi";
-import { RiUserHeartFill, RiBookMarkFill, RiCodeBoxFill } from "react-icons/ri";
-import { BsStar, BsStarFill, BsCart } from "react-icons/bs";
+import { BsCart } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineLeft } from "react-icons/ai";
-import { createFavorite, removeFavorite } from "../services/order-services";
 import { useAuth } from "../context/auth-context";
 import CategoryProducts from "../components/category-products";
 import ShowProducts from "../components/show-products";
@@ -21,14 +18,13 @@ const SearchCartBar = styled.div`
   gap: 16px;
   align-items: center;
   justify-content: center;
-  // margin-bottom: 49px;
 `;
 
 function HomePage() {
-  const {setCurrentPage, state, setState} = useAuth();
+  const {setReferencePage, state, setState} = useAuth();
   const [query, setQuery] = useState("");
 
-  setCurrentPage("home-page");
+  setReferencePage("home-page");
 
   const productsList = JSON.parse(sessionStorage.getItem(productsKey));
   const { status, data: queryResults, error } = state;

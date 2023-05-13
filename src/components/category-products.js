@@ -63,10 +63,11 @@ function CategoryProducts() {
     <StyledDivForm>
       <CategoriesDataContainer>
         <OptionsContainer>
-          {categoryList.map((category)=> (
+          {categoryList.map((category, index)=> (
             <Option
             productOption={productOption}
             category={category}
+            key={index}
             onClick={()=> setProductOption(category)}>
               {category.charAt(0).toUpperCase() + category.slice(1)}
             </Option>

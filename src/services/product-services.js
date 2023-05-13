@@ -1,10 +1,6 @@
 import collectionClient from "./collection-client";
 import { productsKey } from "../config";
 
-// export async function getProducts() {
-//   return await collectionClient(`/products`);
-// }
-
 export async function getProducts() {
   const { ...products } = await collectionClient(`/products`);
 
@@ -15,8 +11,6 @@ export async function getProducts() {
 export async function getProduct(id) {
   return await collectionClient(`/products/${id}`);
 }
-
-
 
 export async function createProduct(newProductData) {
   return await collectionClient("/products", {

@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 
 
 const MainWrapper= styled.p`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StyledText= styled.p`

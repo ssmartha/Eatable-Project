@@ -67,14 +67,12 @@ function CartPage() {
     if(index !== -1 && cartData[index].quantity > 0){
       const updatedQuantityInCartData = [...cartData];
       updatedQuantityInCartData[index] = {... updatedQuantityInCartData[index], quantity: updatedQuantityInCartData[index].quantity-1};
-      console.log("updatedCartDataList1", updatedQuantityInCartData)
       setCartData(updatedQuantityInCartData);
     }
 
     if(index !== -1 && cartData[index].quantity === 1 ){
       let updatedCartDataList = [...cartData];
-      updatedCartDataList = updatedCartDataList.filter(product => product.id !== id)
-      console.log("updatedCartDataList2", updatedCartDataList)
+      updatedCartDataList = updatedCartDataList.filter(product => product.id !== id);
       if (updatedCartDataList.length === 0) {
         setCartData(null)
       } else {

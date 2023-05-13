@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Input, StyledButton, StyledForm } from "./input";
-import * as userServices from "../services/user-services";
+import { update } from "../services/user-services";
 import { useAuth } from "../context/auth-context";
 import styled from "@emotion/styled";
 import { colors } from "../styles";
@@ -71,7 +71,7 @@ function UpdateDetails ({updateMainState, newMainState, from}) {
     function handleSubmit(event) {
       event.preventDefault();
 
-      userServices.update(formData).then(setUser).catch(console.log);
+      update(formData).then(setUser).catch(console.log);
       updateMainState(newMainState);
     }
 

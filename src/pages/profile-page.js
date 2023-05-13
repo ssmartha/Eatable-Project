@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
-import * as userServices from "../services/user-services";
 import { useAuth } from "../context/auth-context";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Input, StyledButton, StyledForm, Wrapper1 } from "../components/input";
+import { StyledButton, Wrapper1 } from "../components/input";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import UpdateDetails from "../components/update-details";
 import { colors } from "../styles";
@@ -68,10 +67,10 @@ const Text3 = styled.p`
 `;
 
 function ProfilePage () {
-  const { user, logout, setCurrentPage } = useAuth();
+  const { user, logout, setReferencePage } = useAuth();
   const [ profileState, setProfileState] = useState("show-profile-details");
 
-  setCurrentPage("profile-page");
+  setReferencePage("profile-page");
 
   function handleLogout(event) {
       event.preventDefault();

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
 import { Input, StyledButton, StyledForm } from "./input";
-import { colors } from "../styles";
+import { getProducts } from "../services/product-services";
 
 
 function LoginForm() {
@@ -19,6 +19,7 @@ function LoginForm() {
   function handleSubmit(event) {
     event.preventDefault();
 
+    getProducts().then().catch(console.log);
     login(formData);
   }
 

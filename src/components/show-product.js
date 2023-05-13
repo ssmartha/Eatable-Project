@@ -2,12 +2,13 @@ import { useAuth } from "../context/auth-context";
 import styled from "@emotion/styled";
 import { useParams} from 'react-router-dom';
 import { useState, useEffect } from "react";
-import * as productServices from "../services/product-services";
+import { getProduct } from "../services/product-services"
 import { StyledButton } from "./input";
 import { Link } from "react-router-dom";
 import { GiSandsOfTime } from "react-icons/gi";
 import { AiOutlineLeft } from "react-icons/ai";
 import { colors } from "../styles";
+import { cartKey } from "../config";
 
 const MainContainer = styled.div`
   display: flex;
@@ -19,6 +20,14 @@ const MainContainer = styled.div`
 
 const PageContentWrapper = styled.div`
   width: 310px;
+`;
+
+const LoadingDataWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
 `;
 
 const ProductImage = styled.img`
@@ -48,7 +57,7 @@ const Text3 = styled.p`
 
 function ShowProduct() {
   const { id } = useParams();
-  const { user, state, setState, cartData, setCartData} = useAuth();
+  const { cartData, setCartData} = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [currentProductData, setCurrentProductData] = useState(null);
 
@@ -56,7 +65,7 @@ function ShowProduct() {
 
 
   useEffect(() => {
-    productServices.getProduct(id)
+    getProduct(id)
       .then((data) => {
         setCurrentProductData(data);
         setIsLoading(false);
@@ -65,16 +74,17 @@ function ShowProduct() {
 
   }, [id]);
 
-  function handleButtonClick(currentProductData, cartData, user) {
+  function handleButtonClick(currentProductData, cartData) {
+    let newCartData = cartData;
 
     if (!cartData){
-      setCartData([{"id": currentProductData.id, "quantity": 1, "image": currentProductData.picture_url, "name": currentProductData.name, "price": currentProductData.price}]);
+      newCartData = [{"id": currentProductData.id, "quantity": 1, "image": currentProductData.picture_url, "name": currentProductData.name, "price": currentProductData.price}]
+      setCartData(newCartData);
 
     } else {
-      
-      const newCartData = cartData.push({"id":currentProductData.id, "quantity":1, "image": currentProductData.picture_url, "name": currentProductData.name, "price": currentProductData.price})
+      newCartData.push({"id":currentProductData.id, "quantity":1, "image": currentProductData.picture_url, "name": currentProductData.name, "price": currentProductData.price})
 
-      const uniqueProducts = cartData.reduce((acum, current)=> {
+      newCartData = newCartData.reduce((acum, current)=> {
         const existing = acum.find(product => product.id === currentProductData.id);
         if(existing){
           existing.quantity += current.quantity;
@@ -85,10 +95,10 @@ function ShowProduct() {
       }, [])
 
 
-      setCartData(uniqueProducts);
+      setCartData(newCartData);
     }
     
-    
+    sessionStorage.setItem(cartKey, JSON.stringify(Object.values(newCartData)));
     setIsAddedToCart(true);
   }
 
@@ -96,10 +106,10 @@ function ShowProduct() {
     <div style={{display: "flex", justifyContent: "center", alignItems: "center",marginTop:"57px"}}>
       <MainContainer>
         {isLoading ? (
-          <div>
-            <GiSandsOfTime style={{width: "120px", height: "120px"}}/>
-            <p>Retrieving product data!</p>
-          </div>
+          <LoadingDataWrapper>
+            <GiSandsOfTime style={{width: "150px", height: "150px"}}/>
+            <Text1 style={{textAlign: "center"}}>Retrieving product data</Text1>
+          </LoadingDataWrapper>
         )
           : (
             <>
@@ -117,7 +127,7 @@ function ShowProduct() {
                 </PageContentWrapper>
 
               <StyledButton 
-              onClick={()=> handleButtonClick( currentProductData, cartData, user)} 
+              onClick={()=> handleButtonClick( currentProductData, cartData)} 
               disabled={isAddedToCart}
               style={{width: "310px", marginBottom: "80px"}}
               >

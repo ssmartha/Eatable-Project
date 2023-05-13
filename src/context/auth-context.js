@@ -1,9 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import * as orderServices from "../services/order-services";
 import * as authServices from "../services/auth-services";
 import * as userServices from "../services/user-services";
-import * as productServices from "../services/product-services";
-import { productsKey } from "../config";
+import { cartKey } from "../config";
 
 const AuthContext = createContext();
 
@@ -12,9 +10,9 @@ function AuthProvider(props) {
   const [user, setUser] = useState(null);
   const [productsList, setProductsList] = useState(null);
   const [userFound, setUserFound] = useState(null);
-  const [currentPage, setCurrentPage] = useState("");
+  const [referencePage, setReferencePage] = useState("");
   const [iconClickedStatus, setIconClickedStatus] = useState("");
-  const [cartData, setCartData] = useState(null);
+  const [cartData, setCartData] = useState(JSON.parse(sessionStorage.getItem(cartKey))? JSON.parse(sessionStorage.getItem(cartKey)): null);
   const [ordersHistory, setOrdersHistory]= useState(null);
   const [totalCurrentOrder, setTotalCurrentOrder] = useState(0);
   const [state, setState] = useState({
@@ -23,16 +21,15 @@ function AuthProvider(props) {
     error: null,
   });
 
-
-  useEffect((state, currentPage, cartData) => {
+  useEffect((state) => {
     userServices.getUser().then(setUser).catch(console.log);
     setState({ ...state, status: "show-products" });
 
-  }, [currentPage]);
+  }, [referencePage]);
 
 
   function login(credentials) {
-    authServices.login(credentials).then(setUser).catch(console.log);
+    authServices.login(credentials).then(setUser).catch(()=> setUser(null));
   }
 
   function logout() {
@@ -40,14 +37,14 @@ function AuthProvider(props) {
   }
 
   function signup(newCredentials) {
-    userServices.createUser(newCredentials).then(setUser).catch(console.log);
+    userServices.createUser(newCredentials).then(setUser).catch(()=> setUser(null));
   }
 
   const value = {
     user,
     setUser,
-    currentPage,
-    setCurrentPage,
+    referencePage,
+    setReferencePage,
     productsList,
     setProductsList,
     userFound,

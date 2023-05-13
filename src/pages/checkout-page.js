@@ -5,8 +5,7 @@ import {AiOutlineLeft} from "react-icons/ai";
 import { useAuth } from "../context/auth-context";
 import { Wrapper1, Wrapper2, StyledButton } from "../components/input";
 import UpdateDetails from "../components/update-details";
-import { addNewOrder, getOrders } from "../services/order-services";
-import { Navigate } from "react-router-dom";
+import { addNewOrder } from "../services/order-services";
 import { colors } from "../styles";
 
 const Text1= styled.p`
@@ -71,12 +70,12 @@ const AddressDetailsContainer= styled.div`
 function CheckoutPage(){
 
     const {user, totalCurrentOrder, cartData, setCartData,
-           setTotalCurrentOrder, setCurrentPage} = useAuth();
+           setTotalCurrentOrder, setReferencePage} = useAuth();
     const [changeUserDetails, setChangeUserDetails] = useState(false)
     const [disabledStatusOrderButton, setDisabledStatusOrderButton]= useState(cartData? false: true)
     const navigate = useNavigate();
 
-    setCurrentPage("checkout-page");
+    setReferencePage("checkout-page");
 
     function completingOrder(){
         const cleanCartData = cartData?.reduce((acum,current)=>{
@@ -86,7 +85,7 @@ function CheckoutPage(){
 
         const newOrder={"delivery_address": user.address,"items": cleanCartData}
 
-        addNewOrder(newOrder).then(console.log).catch(console.log)
+        addNewOrder(newOrder)
         setCartData(null);
         setTotalCurrentOrder(0);
         navigate("/history")

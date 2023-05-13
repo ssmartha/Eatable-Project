@@ -57,12 +57,7 @@ function CategoryProducts() {
     return acum
   },[]);
 
-  console.log("category list", categoryList)
-  console.log("LIST 1",productsList);
   let currentCategoryProducts = productsList.filter((product) => product.category.toLowerCase().includes(productOption));
-  console.log("LIST2",currentCategoryProducts);
-
-
 
   return (
     <StyledDivForm>

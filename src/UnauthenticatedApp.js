@@ -62,7 +62,7 @@ function UnauthenticatedApp() {
           </OptionsContainer>
       </Wrapper1>
 
-      <StyledDivForm>
+      <StyledDivForm style={{marginBottom: "20px"}}>
           {showEntryOption ==='login' ? <LoginForm /> : <SignupForm />}
       </StyledDivForm>
     </div>

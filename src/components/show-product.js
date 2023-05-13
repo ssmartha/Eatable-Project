@@ -1,22 +1,13 @@
-// import CategoryCard from "../CategoryCard";
-import PropTypes from "prop-types";
-import { Wrapper } from "../styles";
 import { useAuth } from "../context/auth-context";
 import styled from "@emotion/styled";
-import ProductCard from "./product-card";
-import { productsKey } from "../config";
-import { useParams, useResolvedPath } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import { useState, useEffect } from "react";
 import * as productServices from "../services/product-services";
 import { StyledButton } from "./input";
 import { Link } from "react-router-dom";
-import { CgSandClock } from "react-icons/vsc";
-import NotFound from "./not-found";
-import { CiSearch } from "react-icons/ci";
 import { GiSandsOfTime } from "react-icons/gi";
 import { AiOutlineLeft } from "react-icons/ai";
-import { BsCart } from "react-icons/bs";
-import { cartKey } from "../config";
+import { colors } from "../styles";
 
 const MainContainer = styled.div`
   display: flex;
@@ -24,6 +15,35 @@ const MainContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 300px;
+`;
+
+const PageContentWrapper = styled.div`
+  width: 310px;
+`;
+
+const ProductImage = styled.img`
+  width: 241px;
+  height: 241px;
+  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+`;
+
+const Text1 = styled.p`
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 35.2px;
+`;
+
+const Text2 = styled.p`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22.63px;
+`;
+
+const Text3 = styled.p`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20.11px;
 `;
 
 function ShowProduct() {
@@ -73,7 +93,7 @@ function ShowProduct() {
   }
 
   return (
-    <div style={{display: "flex", justifyContent: "center", alignItems: "center",marginTop:"33px"}}>
+    <div style={{display: "flex", justifyContent: "center", alignItems: "center",marginTop:"57px"}}>
       <MainContainer>
         {isLoading ? (
           <div>
@@ -83,20 +103,24 @@ function ShowProduct() {
         )
           : (
             <>
-                <div>
-                  <Link to="/products"> <AiOutlineLeft/> </Link>
+                <PageContentWrapper>
+                  <Link to="/products" style={{color: `${colors.black.black}`}}> <AiOutlineLeft/> </Link>
                   <div style={{display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
-                    <img src={currentProductData.picture_url} alt={id} style={{ width: "241px", height: "241px", borderRadius: "50%", marginTop: "1px", }} />
-                    <h3>{currentProductData.name}</h3>
-                    <h3>${currentProductData.price}</h3>
+                    <ProductImage src={currentProductData.picture_url} alt={id}/>
+                    <Text1 style={{marginTop: "91px", marginBottom: "10px"}}>{currentProductData.name}</Text1>
+                    <Text1 style={{color: `${colors.orange.orioles_orange}`}}>${currentProductData.price}</Text1>
                   </div>
-                  <h6>Description</h6>
-                  <div style={{overflowY: "hidden", height: "120px", marginBottom: "20px"}}>
-                    <p>${currentProductData.description}</p>
+                  <Text2 style={{marginTop: "27px", marginBottom: "4px"}}>Description</Text2>
+                  <div style={{overflowY: "hidden", marginBottom: "20px"}}>
+                    <Text3>{currentProductData.description}</Text3>
                   </div>
-                </div>
+                </PageContentWrapper>
 
-              <StyledButton onClick={()=> handleButtonClick( currentProductData, cartData, user)} disabled={isAddedToCart}>
+              <StyledButton 
+              onClick={()=> handleButtonClick( currentProductData, cartData, user)} 
+              disabled={isAddedToCart}
+              style={{width: "310px", marginBottom: "80px"}}
+              >
                 {isAddedToCart ? <p>Added To Cart</p> : <p>Add To Cart</p>}
               </StyledButton>
             </>

@@ -6,6 +6,8 @@ import { colors } from "../styles";
 const ProductContainer = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     background-color: ${colors.white.one};
     box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
     border-radius: 20px;
@@ -36,15 +38,22 @@ const Text2 = styled.p`
     line-height: 22.63px;
 `;
 
+const ProductImage = styled.img`
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
+`;
+
 function CartProduct({image, name, price, quantity, id, increaseQuantity, decreaseQuantity}){
 
     return(
         <ProductContainer>
-            <img src={image} alt={"product photo"} style={{height:"55px", width:"60px", borderRadius: "50%"}}/>
+            <ProductImage src={image} alt={"product photo"}/>
  
             <Wrapper1 style={{gap: "8px"}}>
-                <Text1>{name}</Text1>
-                <Wrapper2 style={{gap: "89px", alignItems:"center", justifyContent:"center"}}>
+                <Text1>{name[0].toUpperCase()+ name.slice(1)}</Text1>
+                <Wrapper2 style={{alignItems:"center", justifyContent: "space-between", width: "193px"}}>
                     <Text2 style={{color: `${colors.orange.orioles_orange}`}}>{price * quantity}</Text2>
                     <CounterContainer>
                      <Text2 style={{color: `${colors.white.one}`}} onClick={()=> decreaseQuantity(id)}>-</Text2>

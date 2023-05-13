@@ -28,7 +28,7 @@ function HomePage() {
   const {setCurrentPage, state, setState} = useAuth();
   const [query, setQuery] = useState("");
 
-  setCurrentPage("HomePage");
+  setCurrentPage("home-page");
 
   const productsList = JSON.parse(sessionStorage.getItem(productsKey));
   const { status, data: queryResults, error } = state;

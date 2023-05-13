@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import OrderCard from "../components/order-card";
 import { getOrders } from "../services/order-services";
 import NotFound from "../components/not-found";
+import { colors } from "../styles";
 
 const OrdersContainer= styled.div`
     display:flex;
@@ -23,23 +24,35 @@ const Text1=styled.p`
 
 function HistoryPage() {
   const {ordersHistory, setOrdersHistory, setCurrentPage, currentPage} = useAuth();
+  const [previousPage, setPreviousPage] = useState(currentPage)
   setCurrentPage("history-page");
 
   useEffect(()=>{
-    getOrders().then((completedOrders)=> setOrdersHistory(completedOrders)).catch(console.log)
+    getOrders().then((completedOrders)=> {
+      if(completedOrders.length >0){
+        setOrdersHistory(completedOrders)
+      }
+    }).catch(console.log)
   },[currentPage]);
 
   return (
-    <Wrapper1 style={{marginTop:"33px", alignItems:"center"}}>
-      <Wrapper1 >
+    <Wrapper1 style={{marginTop:"51px", alignItems:"center"}}>
+      <Wrapper1 style={{width: "315px"}}>
         <Wrapper2 style={{gap:"105px", marginBottom:"23px"}}>
-          <Link to="/checkout"><AiOutlineLeft/></Link>
+          {previousPage === "home-page" ? 
+          <Link to="/products" style={{marginTop: "7px", color: `${colors.black.black}`}}><AiOutlineLeft/></Link>
+          :
+          previousPage === "profile-page"?
+          <Link to="/profile" style={{marginTop: "7px", color: `${colors.black.black}`}}><AiOutlineLeft/></Link>
+          :
+          <Link to="/checkout" style={{marginTop: "7px", color: `${colors.black.black}`}}><AiOutlineLeft/></Link>
+          }
           <Text1>History</Text1>
         </Wrapper2>
 
         <OrdersContainer>
           {ordersHistory?
-          ordersHistory.map((order)=>(
+           ordersHistory.map((order)=>(
             <OrderCard
             order = {order}
             />

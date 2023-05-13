@@ -6,11 +6,13 @@ const MainWrapper= styled.p`
 display: flex;
 flex-direction: column;
 align-items: center;
+justify-content: center;
 `;
 
 const StyledText= styled.p`
   font-weight: 600;
   font-size: 28px;
+  text-align: center;
 `;
 
 export default function NotFound({ item }){

@@ -3,7 +3,7 @@ import * as userServices from "../services/user-services";
 import { useAuth } from "../context/auth-context";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Input, StyledButton, StyledForm } from "../components/input";
+import { Input, StyledButton, StyledForm, Wrapper1 } from "../components/input";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import UpdateDetails from "../components/update-details";
 import { colors } from "../styles";
@@ -13,7 +13,31 @@ const MainContainer = styled.div`
   flex-direction: column;
   justify-content: left;
   align-items: left;
-  width: 300px;
+  width: 314px;
+`;
+
+const WhiteWrapperForDetails = styled.div`
+  background-color: ${colors.white.one};
+  border-radius: 20px;
+  padding: 12px 10px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 315px;
+`;
+
+const WhiteWrapperForHistory = styled.div`
+  background-color: ${colors.white.one};
+  border-radius: 20px;
+  padding: 19px 24px 18px 19.94px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: row;
+  gap: 202.17px;
+  align-items: center;
+  justify-content: center;
+  width: 314px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -22,17 +46,32 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 300px;
+  margin-bottom: 80px;
 `;
 
-const WhiteWrapper = styled.div`
-  background-color: ${colors.white.one};
-  border-radius: 20px;
-  padding: 12px 10px;
+const Text1 = styled.p`
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 28px;
+`;
+
+const Text2 = styled.p`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+`;
+
+const Text3 = styled.p`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20.11px;
 `;
 
 function ProfilePage () {
-  const { user, logout } = useAuth();
+  const { user, logout, setCurrentPage } = useAuth();
   const [ profileState, setProfileState] = useState("show-profile-details");
+
+  setCurrentPage("profile-page");
 
   function handleLogout(event) {
       event.preventDefault();
@@ -41,53 +80,81 @@ function ProfilePage () {
   }
 
     return (
-      <div style={{display: "flex", flexDirection: "column", gap: "16px", alignItems: "center", marginTop: "33px"}}>
+      <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px"}}>
         <MainContainer>
             <div style={{ display: "flex", flexDirection: "row", gap: "88px",
                      justifyContent: "left", alignItems: "left"}}>
               {profileState === "show-profile-details"? 
-                <Link to="/products"> <AiOutlineLeft/> </Link>
+                <Link to="/products"> <AiOutlineLeft style={{marginTop: "7px", color: `${colors.black.black}`}}/> </Link>
                 :
-                <AiOutlineLeft onClick={()=> setProfileState("show-profile-details")}/>
+                <AiOutlineLeft
+                style={{marginTop: "7px", color: `${colors.black.black}`}}
+                onClick={()=> setProfileState("show-profile-details")}/>
               }
-              <p>My profile</p>
+              <Text1>My Profile</Text1>
             </div>
 
             {profileState === "show-profile-details"? 
-              <div style={{ display: "flex", flexDirection: "row", gap: "88px",
-                      justifyContent: "left", alignItems: "left", marginTop: "18px"}}>
-                <p>Personal details</p>
-                <p onClick={()=> setProfileState("change-profile-details")}> change </p>
+              <div 
+              style={{ 
+              display: "flex", flexDirection: "row", gap: "88px",
+              justifyContent: "space-between", alignItems: "left",
+              marginTop: "34px", marginBottom: "9px"}}>
+                  <Text2>Personal details</Text2>
+                  <Text3 
+                  onClick={()=> setProfileState("change-profile-details")}
+                  style={{color: `${colors.orange.orioles_orange}`}}>
+                    change 
+                  </Text3>
               </div>
               : 
-              <div style={{ marginTop: "18px", marginBottom: "15px"}}>
-                <p>Update personal details</p>
+              <div style={{ marginTop: "34px", marginBottom: "36px"}}>
+                <Text2>Update personal details</Text2>
               </div>              
             }
 
             {profileState === "show-profile-details"?
-            <>
-              <div style={{ display: "flex", flexDirection: "column", gap: "45px", marginBottom: "200px"}}>
-                <WhiteWrapper>
-                  <p> {user.name} </p>
-                  <p> {user.email} </p>
-                  <p> {user.phone} </p>
-                  <p> {user.address} </p>
-                </WhiteWrapper>
+            <Wrapper1 style={{alignItems: "center", justifyContent: "center", width: "314px"}}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "45px", marginBottom: "140px"}}>
+                <WhiteWrapperForDetails>
+                  {user.name? <Text2>{user.name[0].toUpperCase()+ user.name.slice(1)}</Text2>: <Text2>No name found</Text2>}
+                  {user.email? 
+                  <Text3 
+                  style={{color: `${colors.gray.one}`,
+                  borderBottom: `0.5px solid ${colors.gray.one}`,
+                  paddingBottom:"10px"}}>{user.email}</Text3>
+                  :
+                  <Text3
+                  style={{color: `${colors.gray.one}`,
+                  borderBottom: `0.5px solid ${colors.gray.one}`,
+                  paddingBottom:"10px"}}>No email found</Text3>}
+                  {user.phone? 
+                  <Text3 style={{ color: `${colors.gray.one}`,
+                  borderBottom: `0.5px solid ${colors.gray.one}`,
+                  paddingBottom:"10px"}}>{user.phone}</Text3>
+                  :
+                  <Text3
+                  style={{ color: `${colors.gray.one}`,
+                  borderBottom: `0.5px solid ${colors.gray.one}`,
+                  paddingBottom:"10px"}}>No phone found</Text3>}
+                  {user.address? 
+                  <Text3 style={{color: `${colors.gray.one}`}}>{user.address[0]+ user.address.slice(1)}</Text3>
+                  :
+                  <Text3 style={{color: `${colors.gray.one}`}}>No address found</Text3>}
+                </WhiteWrapperForDetails>
 
-                <WhiteWrapper>
-                  <div style={{ display: "flex", flexDirection: "row", gap: "200px",
-                        justifyContent: "center", alignItems: "center"}}>
-                      <p> History </p>
-                      <Link to="/history"><AiOutlineRight/></Link>
-                    </div>
-                </WhiteWrapper>
+                <WhiteWrapperForHistory>
+                      <Text2> History </Text2>
+                      <Link to="/history">
+                          <AiOutlineRight style={{marginTop: "7px", color: `${colors.black.black}`}}/>
+                      </Link>
+                </WhiteWrapperForHistory>
               </div>
               
               <ButtonWrapper>
-                <StyledButton onClick={handleLogout}>Logout</StyledButton>
+                <StyledButton onClick={handleLogout} style={{width: "310px"}}>Logout</StyledButton>
               </ButtonWrapper>
-            </>
+            </Wrapper1>
               :
               <UpdateDetails/>
             }

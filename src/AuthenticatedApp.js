@@ -1,28 +1,22 @@
-import { useState, useEffect } from "react";
 import React from "react";
 import {
   BrowserRouter, // Para declarar rutas => el padre de todas las rutas
   Routes, // Se ocupan de listar las rutas independientes.
   Route, // Para declarar una ruta
   Link, // Para navegar entre las rutas
-  useParams,
 } from "react-router-dom";
 import HomePage from "./pages/home-page";
-// import UpdateProfilePage from "./pages/updateprofile-page";
 import ProfilePage from "./pages/profile-page";
 import HistoryPage from "./pages/history-page";
 import { VscHome } from "react-icons/vsc";
-import { BsFillStarFill, BsPersonFill } from "react-icons/bs";
+import { BsPersonFill } from "react-icons/bs";
 import { BiHistory } from "react-icons/bi";
-// import { RiSearchFill } from "react-icons/ri";
-import { useAuth } from "./context/auth-context";
 import * as productServices from "./services/product-services";
 import ShowProduct from "./components/show-product";
 import CartPage from "./pages/cart-page";
 import CheckoutPage from "./pages/checkout-page";
 import { colors } from "./styles";
-
-
+import "./index.css"
 
 function AuthenticatedApp() {
 
@@ -42,7 +36,7 @@ function AuthenticatedApp() {
       bottom: "0",
       }}>
         <Link to="/products"> {<VscHome style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
-        <Link to="/show-profile">  {<BsPersonFill style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
+        <Link to="/profile">  {<BsPersonFill style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
         <Link to="/history"> {<BiHistory style={{width: "45px", height: "45px", color: `${colors.gray.two}`}} />} </Link>
     </nav>
   );

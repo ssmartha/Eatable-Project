@@ -9,7 +9,7 @@ const UpdateComponentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 314px;
-  gap: ${props => props.from === "checkout"? "150px": "220px"}
+  gap: ${props => props.from === "checkout"? "150px": "170px"}
 `;
 
 const WhiteWrapper = styled.div`

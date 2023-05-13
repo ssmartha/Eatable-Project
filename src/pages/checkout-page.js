@@ -56,6 +56,7 @@ const MainContainer= styled.div`
     flex-direction: column;
     justify-content: left;
     align-items: left;
+    width: 315px;
 `;
 
 const AddressDetailsContainer= styled.div`
@@ -70,10 +71,12 @@ const AddressDetailsContainer= styled.div`
 function CheckoutPage(){
 
     const {user, totalCurrentOrder, cartData, setCartData,
-           setTotalCurrentOrder} = useAuth();
+           setTotalCurrentOrder, setCurrentPage} = useAuth();
     const [changeUserDetails, setChangeUserDetails] = useState(false)
     const [disabledStatusOrderButton, setDisabledStatusOrderButton]= useState(cartData? false: true)
     const navigate = useNavigate();
+
+    setCurrentPage("checkout-page");
 
     function completingOrder(){
         const cleanCartData = cartData?.reduce((acum,current)=>{
@@ -93,7 +96,14 @@ function CheckoutPage(){
         <Wrapper1 style={{alignItems:"center", marginTop:"33px"}}>
             <MainContainer>
                 <Wrapper2 style={{gap:"105px", marginBottom:"25px"}}>
-                    <Link to="/cart"><AiOutlineLeft/></Link>
+                    {changeUserDetails? 
+                    <AiOutlineLeft 
+                    style={{marginTop: "4px", color: `${colors.black.black}`}}
+                    onClick={()=> setChangeUserDetails(false)}
+                    />
+                    :
+                    <Link to="/cart" style={{marginTop: "4px", color: `${colors.black.black}`}}><AiOutlineLeft/></Link>
+                    }
                     <Text2>Checkout</Text2>
                 </Wrapper2>
 
@@ -106,26 +116,29 @@ function CheckoutPage(){
                     </>
                     : 
                     <>
-                        <Wrapper2 style={{ marginBottom: "17px",justifyContent:"space-between"}}>
+                        <Wrapper2 style={{ marginBottom: "17px",justifyContent:"space-between", width: "301px"}}>
                             <Text4>Address details</Text4>
                             <Text5 style={{color: `${colors.orange.orioles_orange}`}} onClick={()=> setChangeUserDetails(true)}>change</Text5>
                         </Wrapper2>
 
                         <AddressDetailsContainer>
-                            <div style={{paddingBottom:"7px",borderBottom: "0.5px solid white"}}>
-                            <Text4>{user.name}</Text4>
-                            </div>
-                            <div style={{padding: "10px 0px 5px 0px", borderBottom:"0.5px solid white"}}>
-                            <Text6>{user.address}</Text6>
-                            </div>
-                            <div style={{paddingTop:"10px"}}>
-                            <Text6>{user.phone}</Text6> 
-                            </div>
+                            {user.name? 
+                            <Text4 style={{paddingBottom:"7px",borderBottom: `0.5px solid ${colors.gray.one}`}}>{user.name[0].toUpperCase()+ user.name.slice(1)}</Text4>
+                            :
+                            <Text6 style={{paddingBottom:"7px",borderBottom: `0.5px solid ${colors.gray.one}`}}>No name found</Text6>}
+                            {user.address? 
+                            <Text6 style={{padding: "10px 0px 5px 0px", borderBottom:`0.5px solid ${colors.gray.one}`}}>{user.address[0].toUpperCase()+ user.address.slice(1)}</Text6>
+                            :
+                            <Text6 style={{padding: "10px 0px 5px 0px", borderBottom:`0.5px solid ${colors.gray.one}`}}>No address found</Text6>}
+                            {user.phone? 
+                            <Text6 style={{paddingTop:"10px"}}>{user.phone}</Text6>
+                            :
+                            <Text6 style={{paddingTop:"10px"}}>No phone found</Text6>}
                         </AddressDetailsContainer>
 
-                        <Wrapper2 style={{justifyContent:"space-between", marginBottom:"35px", marginTop:"80px"}}>
+                        <Wrapper2 style={{justifyContent:"space-between", marginBottom:"35px", marginTop:"80px", width: "312px"}}>
                             <Text7>Total</Text7>
-                            <Text3>{totalCurrentOrder}</Text3>
+                            <Text3>${totalCurrentOrder}</Text3>
                         </Wrapper2>
 
                         <StyledButton onClick={completingOrder} disabled={disabledStatusOrderButton}>

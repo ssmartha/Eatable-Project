@@ -47,23 +47,23 @@ const ProductContent= styled.div`
 const Text1 = styled.p`
   font-weight: 600;
   font-size: 22px;
-  line-heigth: 27.65px;
+  line-height: 27.65px;
 `;
 
 function ProductCard({ image, name, price, url, id }) {
 
   return (
     <CardWrapper>
-      <Link to={url} style={{textDecoration: "none", color: `${colors.black.dark_charcoal}`}}>
+      <Link to={url} style={{color: `${colors.black.dark_charcoal}`}}>
             <ProductDetails>
               <ProductImage src={image} alt={id}/>
               <ProductContent>
-                <Text1 style={{width: "156px", textAlign: "center", padding: "0px 13px"}}>{name.charAt(0).toUpperCase()+ name.slice(1)}</Text1>
+                <Text1 style={{width: "156px", textAlign: "center", padding: "0px 13px"}}>{name[0].toUpperCase()+ name.slice(1)}</Text1>
                 <Wrapper2 style={{alignItems: "center", justifyContent:"center", gap: "1px"}}>
                   <FontAwesomeIcon 
                   icon={faDollar} 
                   size="xs" 
-                  style={{color: `${colors.orange.orioles_orange}`, height: "20px", paddingTop:"6px"}} />
+                  style={{color: `${colors.orange.orioles_orange}`, height: "22px"}} />
 
                   <Text1 style={{color: `${colors.orange.orioles_orange}`, height: "28px"}}>{price}</Text1>
                 </Wrapper2>
